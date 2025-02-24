@@ -7,6 +7,8 @@ import { fileURLToPath } from 'url'
 import config from '@/payload.config'
 import './styles.css'
 
+import configPromise from '@payload-config'
+
 export default async function HomePage() {
   const headers = await getHeaders()
   const payloadConfig = await config
@@ -15,10 +17,35 @@ export default async function HomePage() {
 
   const fileURL = `vscode://file/${fileURLToPath(import.meta.url)}`
 
+  const media = await payload.find({
+    collection: 'media',
+    depth: 1,
+    limit: 12,
+    // page: sanitizedPageNumber,
+    overrideAccess: false,
+  })
+
+  // console.log('media', media)
+
   return (
     <div className="home">
       <div className="content">
         <h2>TESTING NEW PAGE</h2>
+        {/* <img src="/api/media/file/ALBOTT.jpg" /> */}
+
+        {media.docs.map((item, i) => {
+          console.log('item', item)
+          return (
+            <Image
+              key={item.id}
+              src={item.url}
+              width={item.width}
+              height={item.height}
+              alt={item.alt}
+            />
+          )
+        })}
+
         {/* <picture>
           <source srcSet="https://raw.githubusercontent.com/payloadcms/payload/main/packages/ui/src/assets/payload-favicon.svg" />
           <Image
