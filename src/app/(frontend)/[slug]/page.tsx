@@ -2,8 +2,18 @@ import React, { cache } from 'react'
 import configPromise from '@payload-config'
 import { getPayload } from 'payload'
 import { notFound } from 'next/navigation'
-import type { StaticImageData } from 'next/image'
-import Image from 'next/image'
+
+type Media = {
+  id: string
+  url: string
+  width?: number
+  height?: number
+  alt: string
+  updatedAt: string
+  createdAt: string
+}
+
+import Gallery from '../_gallery/Gallery'
 
 export const revalidate = 120 //
 
@@ -51,14 +61,17 @@ export default async function AlbumPage({ params: paramsPromise }: Args) {
 
   if (!album) return notFound()
 
-  console.log('album', album)
   // if (!album) return notFound(); // Show 404 if album isn't found
 
   return (
     <div>
       <h1>ALBUM HERE - {slug}</h1>
 
-      {album.images?.map((item) => {
+      <Gallery
+        images={(album.images ?? []).filter((item): item is Media => typeof item !== 'string')}
+      />
+
+      {/* {album.images?.map((item) => {
         // If item is a string, it's an ID, so we can't use it directly
         if (typeof item === 'string') {
           return <p key={item}>Loading image...</p> // Handle missing data gracefully
@@ -83,7 +96,7 @@ export default async function AlbumPage({ params: paramsPromise }: Args) {
             loading="lazy"
           />
         )
-      })}
+      })} */}
     </div>
   )
 }
