@@ -18,7 +18,8 @@ export default async function HomePage() {
   return (
     <div className="home">
       <div className="content">
-        <picture>
+        <h2>TESTING NEW PAGE</h2>
+        {/* <picture>
           <source srcSet="https://raw.githubusercontent.com/payloadcms/payload/main/packages/ui/src/assets/payload-favicon.svg" />
           <Image
             alt="Payload Logo"
@@ -53,6 +54,7 @@ export default async function HomePage() {
         <a className="codeLink" href={fileURL}>
           <code>app/(frontend)/page.tsx</code>
         </a>
+         */}
       </div>
     </div>
   )
