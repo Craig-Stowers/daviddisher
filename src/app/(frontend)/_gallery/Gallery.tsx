@@ -48,7 +48,7 @@ export default function Gallery({ images }: { images: ImageItem[] }) {
               alt={alt}
               placeholder="blur"
               blurDataURL="data:image/png;base64,..." // Optional placeholder
-              quality={100}
+              quality={50}
               loading="lazy"
             />
           </div>
