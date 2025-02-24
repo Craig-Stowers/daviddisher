@@ -11,7 +11,7 @@ interface ImageItem {
   alt?: string
 }
 
-export default async function Gallery({ images }: { images: ImageItem[] }) {
+export default function Gallery({ images }: { images: ImageItem[] }) {
   return (
     <div style={{ display: 'flex', flexWrap: 'wrap' }}>
       {images?.map((item) => {
