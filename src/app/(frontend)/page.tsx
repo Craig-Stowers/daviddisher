@@ -11,11 +11,12 @@ import configPromise from '@payload-config'
 import type { StaticImageData } from 'next/image'
 
 export default async function HomePage() {
-  const headers = await getHeaders()
+  //const headers = await getHeaders()
   const payloadConfig = await config
   //const payload = await getPayload({ config: payloadConfig })
   const payload = await getPayload({ config: configPromise })
-  const { user } = await payload.auth({ headers })
+
+  // const { user } = await payload.auth({ headers })
 
   const fileURL = `vscode://file/${fileURLToPath(import.meta.url)}`
 

@@ -10,4 +10,4 @@ export default async function BioPage() {
   )
 }
 
-export const revalidate = 120 // Cache the page for 60 seconds before refreshing
+export const revalidate = 120 // Cache the page for 120 seconds before refreshing
