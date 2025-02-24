@@ -13,7 +13,7 @@ interface ImageItem {
 
 export default async function Gallery({ images }: { images: ImageItem[] }) {
   return (
-    <div>
+    <div style={{ display: 'flex', flexWrap: 'wrap' }}>
       {images?.map((item) => {
         // If item is a string, it's an ID, so we can't use it directly
         if (typeof item === 'string') {
@@ -27,17 +27,31 @@ export default async function Gallery({ images }: { images: ImageItem[] }) {
         const alt = item.alt || 'Default image'
 
         return (
-          <Image
+          <div
             key={item.id}
-            src={src}
-            width={width}
-            height={height}
-            alt={alt}
-            placeholder="blur"
-            blurDataURL="data:image/png;base64,..." // Optional placeholder
-            quality={100}
-            loading="lazy"
-          />
+            style={{
+              width: 280,
+              height: 280,
+              position: 'relative',
+              overflow: 'hidden',
+              border: '12px solid yellow',
+            }}
+          >
+            <Image
+              src={src}
+              // width={width}
+              // height={height}
+              // width={180}
+              // height={180}
+              layout="fill"
+              objectFit="cover"
+              alt={alt}
+              placeholder="blur"
+              blurDataURL="data:image/png;base64,..." // Optional placeholder
+              quality={100}
+              loading="lazy"
+            />
+          </div>
         )
       })}
     </div>
