@@ -21,23 +21,16 @@ const queryAlbumBySlug = cache(async ({ slug }: { slug: string }) => {
         equals: slug,
       },
     },
+    depth: 2, // Ensures full media objects are returned instead of just IDs
   })
 
   return result.docs?.[0] || null
 })
 
-interface MediaItem {
-  id: string
-  url?: string | null
-  width?: number | null
-  height?: number | null
-  alt?: string | null
-}
-
 export default async function AlbumPage({ params: paramsPromise }: Args) {
   const { slug = 'home' } = await paramsPromise
 
-  const album: { images?: MediaItem[] } | null = await queryAlbumBySlug({ slug })
+  const album = (await queryAlbumBySlug({ slug })) || null
 
   if (!album) return notFound()
 
@@ -48,7 +41,12 @@ export default async function AlbumPage({ params: paramsPromise }: Args) {
     <div>
       <h1>ALBUM HERE - {slug}</h1>
 
-      {album.images?.map((item: MediaItem) => {
+      {album.images?.map((item) => {
+        // If item is a string, it's an ID, so we can't use it directly
+        if (typeof item === 'string') {
+          return <p key={item}>Loading image...</p> // Handle missing data gracefully
+        }
+
         // Ensure src is always a valid string
         const src: StaticImageData | string = item.url || '/fallback.jpg'
         const width = item.width ?? 100 // Default width if missing
