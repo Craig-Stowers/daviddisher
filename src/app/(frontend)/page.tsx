@@ -24,7 +24,7 @@ export default async function HomePage() {
   const media = await payload.find({
     collection: 'media',
     depth: 1,
-    limit: 12,
+    // limit: 12,
     overrideAccess: false,
   })
 
