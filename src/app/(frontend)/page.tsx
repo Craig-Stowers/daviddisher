@@ -7,7 +7,7 @@ import { fileURLToPath } from 'url'
 import config from '@/payload.config'
 import './styles.css'
 
-import configPromise from '@payload-config'
+import type { StaticImageData } from 'next/image'
 
 export default async function HomePage() {
   const headers = await getHeaders()
@@ -17,71 +17,49 @@ export default async function HomePage() {
 
   const fileURL = `vscode://file/${fileURLToPath(import.meta.url)}`
 
+  // Fetch media
   const media = await payload.find({
     collection: 'media',
     depth: 1,
     limit: 12,
-    // page: sanitizedPageNumber,
     overrideAccess: false,
   })
 
-  // console.log('media', media)
+  // Define type for media items
+  interface MediaItem {
+    id: string
+    url?: string | null
+    width?: number | null
+    height?: number | null
+    alt?: string | null
+  }
 
   return (
     <div className="home">
       <div className="content">
-        <h2>TESTING NEW PAGE</h2>
-        {/* <img src="/api/media/file/ALBOTT.jpg" /> */}
+        <h2>TESTING ALL MEDIA</h2>
 
-        {media.docs.map((item, i) => {
-          console.log('item', item)
+        {media.docs.map((item: MediaItem) => {
+          // Ensure src is always a valid string
+          const src: StaticImageData | string = item.url || '/fallback.jpg'
+          const width = item.width ?? 100 // Default width if missing
+          const height = item.height ?? 100 // Default height if missing
+          const alt = item.alt || 'Default image'
+
           return (
             <Image
               key={item.id}
-              src={item.url}
-              width={item.width}
-              height={item.height}
-              alt={item.alt}
+              src={src}
+              width={width}
+              height={height}
+              alt={alt}
+              placeholder="blur"
+              blurDataURL="data:image/png;base64,..." // Optional placeholder
+              quality={100}
+              loading="lazy"
             />
           )
         })}
-
-        {/* <picture>
-          <source srcSet="https://raw.githubusercontent.com/payloadcms/payload/main/packages/ui/src/assets/payload-favicon.svg" />
-          <Image
-            alt="Payload Logo"
-            height={65}
-            src="https://raw.githubusercontent.com/payloadcms/payload/main/packages/ui/src/assets/payload-favicon.svg"
-            width={65}
-          />
-        </picture>
-        {!user && <h1>Welcome to your new project.</h1>}
-        {user && <h1>Welcome back, {user.email}</h1>}
-        <div className="links">
-          <a
-            className="admin"
-            href={payloadConfig.routes.admin}
-            rel="noopener noreferrer"
-            target="_blank"
-          >
-            Go to admin panel
-          </a>
-          <a
-            className="docs"
-            href="https://payloadcms.com/docs"
-            rel="noopener noreferrer"
-            target="_blank"
-          >
-            Documentation
-          </a>
-        </div>
-      </div>
-      <div className="footer">
-        <p>Update this page by editing</p>
-        <a className="codeLink" href={fileURL}>
-          <code>app/(frontend)/page.tsx</code>
-        </a>
-         */}
       </div>
     </div>
   )
