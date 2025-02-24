@@ -61,11 +61,13 @@ export default async function AlbumPage({ params: paramsPromise }: Args) {
 
   if (!album) return notFound()
 
+  console.log(album)
+
   // if (!album) return notFound(); // Show 404 if album isn't found
 
   return (
     <div>
-      <h1>ALBUM HERE - {slug}</h1>
+      <h1>ALBUM HERE - {album.name}</h1>
 
       <Gallery
         images={(album.images ?? []).filter((item): item is Media => typeof item !== 'string')}
