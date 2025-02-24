@@ -67,4 +67,4 @@ export default async function HomePage() {
   )
 }
 
-export const revalidate = 60 // Cache the page for 60 seconds before refreshing
+export const revalidate = 120 // Cache the page for 60 seconds before refreshing
