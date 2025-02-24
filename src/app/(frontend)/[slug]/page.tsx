@@ -5,6 +5,8 @@ import { notFound } from 'next/navigation'
 import type { StaticImageData } from 'next/image'
 import Image from 'next/image'
 
+export const revalidate = 120 //
+
 type Args = {
   params: Promise<{
     slug?: string
@@ -26,6 +28,21 @@ const queryAlbumBySlug = cache(async ({ slug }: { slug: string }) => {
 
   return result.docs?.[0] || null
 })
+
+export async function generateStaticParams() {
+  const payload = await getPayload({ config: configPromise })
+
+  const albums = await payload.find({
+    collection: 'albums',
+    depth: 1,
+  })
+
+  return albums.docs.map((album) => ({
+    params: {
+      slug: album.slug,
+    },
+  }))
+}
 
 export default async function AlbumPage({ params: paramsPromise }: Args) {
   const { slug = 'home' } = await paramsPromise
