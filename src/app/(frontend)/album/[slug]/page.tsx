@@ -13,7 +13,7 @@ type Media = {
   createdAt: string
 }
 
-import Gallery from '../_gallery/Gallery'
+import Gallery from '../../_gallery/Gallery'
 
 export const revalidate = 120 //
 
@@ -24,6 +24,7 @@ type Args = {
 }
 
 const queryAlbumBySlug = cache(async ({ slug }: { slug: string }) => {
+  console.log('queryAlbumBySlug', slug)
   const payload = await getPayload({ config: configPromise })
 
   const result = await payload.find({
@@ -61,15 +62,14 @@ export default async function AlbumPage({ params: paramsPromise }: Args) {
 
   if (!album) return notFound()
 
-  console.log(album)
-
   // if (!album) return notFound(); // Show 404 if album isn't found
 
   return (
     <div>
-      <h1>ALBUM HERE - {album.name}</h1>
+      <h1>{album.name}</h1>
 
       <Gallery
+        gallerySlug={slug}
         images={(album.images ?? []).filter((item): item is Media => typeof item !== 'string')}
       />
 
