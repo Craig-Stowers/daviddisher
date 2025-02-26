@@ -39,8 +39,8 @@ export default function Gallery({
 
           // Ensure src is always a valid string
           const src: StaticImageData | string = item.url || '/fallback.jpg'
-          const width = item.width ?? 100 // Default width if missing
-          const height = item.height ?? 100 // Default height if missing
+          // const width = item.width ?? 100 // Default width if missing
+          // const height = item.height ?? 100 // Default height if missing
           const alt = item.alt || 'Default image'
 
           return (
