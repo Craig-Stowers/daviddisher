@@ -66,7 +66,7 @@ export default async function AlbumPage({ params: paramsPromise }: Args) {
 
   return (
     <div>
-      <h1>{album.name}</h1>
+      {/* <h1>{album.name}</h1> */}
 
       <Gallery
         gallerySlug={slug}

@@ -10,7 +10,7 @@ html {
   font-size: 18px;
   line-height: 32px;
 
-  background: rgb(0, 0, 0);
+  background: rgb(255, 255, 255);
   -webkit-font-smoothing: antialiased;
 }
 
@@ -159,6 +159,68 @@ svg {
       padding: 0 0.5rem;
       background: rgb(60, 60, 60);
       border-radius: 4px;
+    }
+  }
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: black;
+
+  padding: 24px 45px;
+  max-width: 1024px;
+  margin: 0 auto;
+
+  @media (max-width: 400px) {
+    padding: 24px;
+  }
+
+  a {
+    text-decoration: none;
+    color: rgb(1000, 1000, 1000);
+  }
+
+  .logo {
+    font-size: 24px;
+    font-weight: bold;
+  }
+
+  .links {
+    display: flex;
+    gap: 12px;
+
+    a {
+      padding: 0.25rem 0.5rem;
+      border-radius: 4px;
+    }
+
+    .admin {
+      color: rgb(0, 0, 0);
+      background: rgb(1000, 1000, 1000);
+      border: 1px solid rgb(0, 0, 0);
+    }
+
+    .docs {
+      color: rgb(1000, 1000, 1000);
+      background: rgb(0, 0, 0);
+      border: 1px solid rgb(1000, 1000, 1000);
+    }
+  }
+
+  ul {
+    display: flex;
+
+    list-style: none;
+
+    li {
+      padding: 10px;
+      border-right: 1px solid black;
+    }
+
+    li:last-child {
+      border-right: none;
     }
   }
 }

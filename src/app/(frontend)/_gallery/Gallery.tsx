@@ -2,6 +2,7 @@
 
 import Image from 'next/image'
 import Link from 'next/link'
+import styles from './Gallery.module.css'
 
 import { useAlbum } from '../AlbumProvider'
 // Define type for image items
@@ -31,34 +32,7 @@ export default function Gallery({
 
   return (
     <div>
-      {/* <div
-        style={{
-          position: 'fixed',
-          top: 0,
-          left: 0,
-          right: 0,
-          backgroundColor: 'rgba(45, 140, 0, 0.19)',
-          height: '100vh',
-          width: '100vw',
-          zIndex: 2,
-          padding: 10,
-        }}
-      >
-        <div
-          // onClick={() => {
-          //   console.log('Close gallery')
-          // }}
-          style={{
-            position: 'absolute',
-            right: '0px',
-            top: '0px',
-            backgroundColor: 'white',
-            width: '30px',
-            height: '30px',
-          }}
-        ></div>
-      </div> */}
-      <div style={{ display: 'flex', flexWrap: 'wrap' }}>
+      <div className={styles.gallery} style={{ display: 'flex', flexWrap: 'wrap' }}>
         {images?.map((item, i) => {
           // If item is a string, it's an ID, so we can't use it directly
           if (typeof item === 'string') {
@@ -72,33 +46,29 @@ export default function Gallery({
           const alt = item.alt || 'Default image'
 
           return (
-            <div
-              key={item.id}
-              style={{
-                width: 280,
-                height: 280,
-                position: 'relative',
-                overflow: 'hidden',
-                border: '12px solid grey',
-              }}
-            >
-              <Link className="card" href={`/album/${gallerySlug}/image/${i}`} passHref>
-                <Image
-                  src={src}
-                  // width={width}
-                  // height={height}
-                  // width={180}
-                  // height={180}
-                  layout="fill"
-                  objectFit="cover"
-                  alt={alt}
-                  placeholder="blur"
-                  blurDataURL="data:image/png;base64,..." // Optional placeholder
-                  quality={50}
-                  // loading="lazy"
-                  sizes="(max-width: 640px) 50vw, (max-width: 1024px) 25vw, 20vw"
-                />
-              </Link>
+            <div className={styles.cardContainer} key={item.id}>
+              <div className={styles.card}>
+                <Link className="card" href={`/album/${gallerySlug}/image/${i}`} passHref>
+                  <Image
+                    src={src}
+                    // width={width}
+                    // height={height}
+                    // width={180}
+                    // height={180}
+                    layout="fill"
+                    objectFit="cover"
+                    alt={alt}
+                    placeholder="blur"
+                    blurDataURL="data:image/png;base64,..." // Optional placeholder
+                    quality={50}
+                    // loading="lazy"
+                    sizes="(max-width: 640px) 50vw, (max-width: 1024px) 25vw, 20vw"
+                  />
+                </Link>
+              </div>
+              <div className={styles.cardText}>
+                <p>{alt}TESTING</p>
+              </div>
             </div>
           )
         })}

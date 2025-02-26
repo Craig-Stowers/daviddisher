@@ -9,6 +9,7 @@ import Image from 'next/image'
 const ImageViewer = ({ index, slug }) => {
   const { images } = useAlbum()
   const [fadeIn, setFadeIn] = useState(false)
+  const [loaded, setLoaded] = useState(false)
 
   const router = useRouter()
   const nextIndex = index + 1 < images.length ? index + 1 : 0
@@ -18,10 +19,11 @@ const ImageViewer = ({ index, slug }) => {
   const alt = images[index].alt
 
   useEffect(() => {
-    setTimeout(() => {
-      setFadeIn(true)
-    }, 100)
-  }, [])
+    if (!loaded) return
+    // setTimeout(() => {
+    setFadeIn(true)
+    // }, 10)
+  }, [loaded])
 
   const nextImage = () => {
     setFadeIn(false)
@@ -49,7 +51,7 @@ const ImageViewer = ({ index, slug }) => {
         left: 0,
         width: '100vw',
         height: '100vh',
-        backgroundColor: 'rgba(0,0,0,0.6)',
+        backgroundColor: 'rgba(0,0,0,0.89)',
         zIndex: 3,
       }}
     >
@@ -66,7 +68,7 @@ const ImageViewer = ({ index, slug }) => {
           style={{
             transition: 'opacity 0.4s',
             width: '100%',
-            height: '100%',
+            height: 'calc(100% - 90px)',
             opacity: fadeIn ? 1 : 0,
 
             position: 'relative',
@@ -79,13 +81,16 @@ const ImageViewer = ({ index, slug }) => {
             alt={alt}
             quality={80}
             style={{ opacity: 1 }}
+            onLoad={() => {
+              setLoaded(true)
+            }}
             // loading="lazy"
             // sizes="(max-width: 640px) 50vw, (max-width: 1024px) 25vw, 20vw"
           />
         </div>
       </div>
 
-      <div style={{ position: 'absolute', top: '50%', right: '50%' }}>
+      <div style={{ position: 'absolute', top: '90%', right: '50%' }}>
         <Link href={`/album/${slug}`} scroll={false}>
           <button>CLOSE</button>
         </Link>
@@ -94,10 +99,6 @@ const ImageViewer = ({ index, slug }) => {
         <button onClick={nextImage}>NEXT</button>
         {/* </Link> */}
       </div>
-
-      <h4>
-        VIEW HERE {index}, {imageSrc}
-      </h4>
     </div>
   )
 }

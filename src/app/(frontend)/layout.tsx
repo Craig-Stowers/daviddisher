@@ -25,9 +25,16 @@ export default async function RootLayout(props: {
   return (
     <html>
       <body>
+        <nav>
+          <h1>David Disher</h1>
+          <ul>
+            <li>Artwork</li>
+            <li>Biography</li>
+            <li>Links</li>
+          </ul>
+        </nav>
         {props.children}
-        BELLOW CHILDREN
-        {props.modal}
+
         <div id="modal-root" />
       </body>
     </html>
