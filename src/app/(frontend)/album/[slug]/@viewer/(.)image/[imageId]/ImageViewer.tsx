@@ -79,8 +79,7 @@ const ImageViewer = ({ index, slug }) => {
             layout="fill"
             objectFit="contain"
             alt={alt}
-            quality={80}
-            style={{ opacity: 1 }}
+            quality={90}
             onLoad={() => {
               setLoaded(true)
             }}

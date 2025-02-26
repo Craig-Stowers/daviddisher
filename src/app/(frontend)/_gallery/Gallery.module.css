@@ -3,7 +3,7 @@
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   grid-gap: 10px;
   justify-content: center;
-  max-width: 1600px;
+  max-width: 80%;
   margin-left: auto;
   margin-right: auto;
 }
@@ -18,11 +18,11 @@
 
 .cardContainer:hover .card {
   filter: invert(100%) brightness(0.3) contrast(0.8);
-  transform: scale(1.16);
+  transform: scale(1.12);
 }
 
 .card {
-  transition: all 0.4s ease;
+  transition: all 0.22s ease;
   cursor: pointer;
 
   width: 100%;
@@ -49,7 +49,7 @@
   opacity: 0;
   font-size: 16px;
   line-height: 30px;
-  transition: all 0.2s ease;
+  transition: all 0.22s ease;
   top: 55%;
   left: 50%;
   transform: translate(-50%, -50%);
