@@ -48,9 +48,9 @@ const ImageViewer = ({ index, slug }) => {
             objectFit="contain"
             alt={alt}
             quality={80}
-            style={{ opacity: 0.8 }}
+            style={{ opacity: 1 }}
             // loading="lazy"
-            sizes="(max-width: 640px) 50vw, (max-width: 1024px) 25vw, 20vw"
+            // sizes="(max-width: 640px) 50vw, (max-width: 1024px) 25vw, 20vw"
           />
         </div>
       </div>
