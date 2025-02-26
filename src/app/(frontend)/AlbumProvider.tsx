@@ -1,5 +1,5 @@
 'use client'
-import { createContext, useContext, useState } from 'react'
+import { createContext, useContext } from 'react'
 
 // Define type for image items
 export interface ImageItem {
