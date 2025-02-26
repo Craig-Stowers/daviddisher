@@ -1,5 +1,3 @@
-import Link from 'next/link'
-import { number } from 'payload/shared'
 import ImageViewer from './ImageViewer'
 
 export default async function PhotoModal(props) {
