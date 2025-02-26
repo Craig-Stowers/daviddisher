@@ -1,17 +1,45 @@
 'use client'
 
+import { useEffect, useState } from 'react'
+import { useRouter } from 'next/navigation'
 import { useAlbum } from '@/app/(frontend)/AlbumProvider'
 import Link from 'next/link'
 import Image from 'next/image'
 
 const ImageViewer = ({ index, slug }) => {
   const { images } = useAlbum()
+  const [fadeIn, setFadeIn] = useState(false)
 
+  const router = useRouter()
   const nextIndex = index + 1 < images.length ? index + 1 : 0
   const prevIndex = index - 1 >= 0 ? index - 1 : images.length - 1
 
   const imageSrc = images[index].url
   const alt = images[index].alt
+
+  useEffect(() => {
+    setTimeout(() => {
+      setFadeIn(true)
+    }, 100)
+  }, [])
+
+  const nextImage = () => {
+    setFadeIn(false)
+
+    setTimeout(() => {
+      router.push(`/album/${slug}/image/${nextIndex}`)
+    }, 300)
+    //router.push(`/album/${slug}/image/${nextIndex}`)
+  }
+
+  const previousImage = () => {
+    setFadeIn(false)
+
+    setTimeout(() => {
+      router.push(`/album/${slug}/image/${prevIndex}`)
+    }, 300)
+    //router.push(`/album/${slug}/image/${nextIndex}`)
+  }
 
   return (
     <div
@@ -36,8 +64,10 @@ const ImageViewer = ({ index, slug }) => {
       >
         <div
           style={{
+            transition: 'opacity 0.4s',
             width: '100%',
             height: '100%',
+            opacity: fadeIn ? 1 : 0,
 
             position: 'relative',
           }}
@@ -59,12 +89,10 @@ const ImageViewer = ({ index, slug }) => {
         <Link href={`/album/${slug}`} scroll={false}>
           <button>CLOSE</button>
         </Link>
-        <Link href={`/album/${slug}/image/${prevIndex}`} scroll={false}>
-          <button>PREV</button>
-        </Link>
-        <Link href={`/album/${slug}/image/${nextIndex}`} scroll={false}>
-          <button>NEXT</button>
-        </Link>
+        <button onClick={previousImage}>PREV</button>
+        {/* <Link href={`/album/${slug}/image/${nextIndex}`} scroll={false}> */}
+        <button onClick={nextImage}>NEXT</button>
+        {/* </Link> */}
       </div>
 
       <h4>
