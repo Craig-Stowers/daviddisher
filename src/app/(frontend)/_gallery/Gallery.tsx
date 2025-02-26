@@ -4,10 +4,8 @@ import Image from 'next/image'
 import Link from 'next/link'
 import styles from './Gallery.module.css'
 
-import { useAlbum } from '../AlbumProvider'
 // Define type for image items
 import type { StaticImageData } from 'next/image'
-import { useEffect } from 'react'
 
 interface ImageItem {
   id: string
