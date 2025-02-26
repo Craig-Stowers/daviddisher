@@ -23,13 +23,11 @@ export default function Gallery({
   images: ImageItem[]
   gallerySlug: string
 }) {
-  console.log('galleryId', gallerySlug)
+  // const { setAlbum } = useAlbum()
 
-  const { setAlbum } = useAlbum()
-
-  useEffect(() => {
-    setAlbum({ slug: gallerySlug, images, index: 0 })
-  }, [gallerySlug, images, setAlbum])
+  // useEffect(() => {
+  //   setAlbum({ slug: gallerySlug, images, index: 0 })
+  // }, [gallerySlug, images, setAlbum])
 
   return (
     <div>
@@ -84,7 +82,7 @@ export default function Gallery({
                 border: '12px solid grey',
               }}
             >
-              <Link className="card" href={`/album/${gallerySlug}/${i}`} passHref>
+              <Link className="card" href={`/album/${gallerySlug}/image/${i}`} passHref>
                 <Image
                   src={src}
                   // width={width}

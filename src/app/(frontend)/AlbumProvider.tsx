@@ -20,10 +20,10 @@ export interface AlbumDataType {
 const AlbumContext = createContext(null)
 
 // Provider component to wrap the app
-export function AlbumProvider({ children }) {
-  const [album, setAlbum] = useState({ slug: null, images: [] })
+export function AlbumProvider({ children, album }) {
+  // const [album, setAlbum] = useState({ slug: null, images: [] })
 
-  return <AlbumContext.Provider value={{ album, setAlbum }}>{children}</AlbumContext.Provider>
+  return <AlbumContext.Provider value={album}>{children}</AlbumContext.Provider>
 }
 
 // Hook to use the album context
