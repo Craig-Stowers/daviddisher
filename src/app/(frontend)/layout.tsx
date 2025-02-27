@@ -25,14 +25,19 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
     <html>
       <body>
         <nav>
-          <h1>David Disher</h1>
+          <h1>
+            <Link href="/">David Disher</Link>
+          </h1>
           <ul>
             <li>
-              <Link href="/album/2000s">TEST</Link>
+              <Link href="/artwork">ARTWORK</Link>
             </li>
-            <li>Artwork</li>
-            <li>Biography</li>
-            <li>Links</li>
+            <li>
+              <Link href="/biography">BIOGRAPHY</Link>
+            </li>
+            <li>
+              <Link href="/contact">CONTACT</Link>
+            </li>
           </ul>
         </nav>
         {props.children}

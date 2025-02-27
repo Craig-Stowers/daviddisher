@@ -17,3 +17,19 @@ export const getAlbumData = cache(async ({ slug }: { slug: string }) => {
 
   return result.docs?.[0] || null
 })
+
+export const getAllAlbums = cache(async () => {
+  const payload = await getPayload({ config: configPromise })
+
+  const result = await payload.find({
+    collection: 'albums',
+    limit: 0,
+    depth: 1,
+
+    // fields: ['id', 'name', 'slug', 'coverImage'],
+  })
+
+  //console.log('QUERY GET ALBUM RESULT', result)
+
+  return result.docs
+})

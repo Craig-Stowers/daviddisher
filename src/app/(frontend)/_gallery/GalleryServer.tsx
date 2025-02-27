@@ -5,8 +5,7 @@ import styles from './Gallery.module.css'
 // Define type for image items
 import type { StaticImageData } from 'next/image'
 
-export default function GalleryServer({ images, gallerySlug }) {
-  console.log('GALLERY SERVER', gallerySlug)
+export default function GalleryServer({ images, getUrlFromIndex }) {
   return (
     <div>
       <div className={styles.gallery} style={{ display: 'flex', flexWrap: 'wrap' }}>
@@ -25,7 +24,8 @@ export default function GalleryServer({ images, gallerySlug }) {
           return (
             <div className={styles.cardContainer} key={item.id}>
               <div className={styles.card}>
-                <Link className="card" href={`/album/${gallerySlug}/image/${i}`} passHref>
+                {/* <Link className="card" href={`/album/${gallerySlug}/image/${i}`} passHref> */}
+                <Link className="card" href={getUrlFromIndex(i)} passHref>
                   <Image
                     src={src}
                     // width={width}

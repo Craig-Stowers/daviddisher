@@ -28,11 +28,15 @@ export default async function AlbumLayout(props) {
   const album = (await queryAlbumBySlug({ slug: newParams.slug })) || null
   //const slug = newParams.slug
 
-  console.log('reload album', album)
-
   return (
     <div className="relative">
-      <GalleryServer images={album.images} gallerySlug={newParams.slug} />
+      <GalleryServer
+        images={album.images}
+        gallerySlug={newParams.slug}
+        getUrlFromIndex={(index) => {
+          return `/album/${newParams.slug}/image/${index}`
+        }}
+      />
 
       <div
         style={{

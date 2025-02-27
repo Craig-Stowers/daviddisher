@@ -26,7 +26,6 @@ body {
   line-height: 32px;
 
   margin: 0;
-  color: rgb(1000, 1000, 1000);
 
   @media (max-width: 1024px) {
     font-size: 15px;
@@ -41,10 +40,10 @@ img {
 }
 
 h1 {
-  margin: 30px 0;
+  margin: 0px 0;
   font-size: 34px;
   line-height: 50px;
-  font-weight: bold;
+  font-weight: 500;
 
   @media (max-width: 1024px) {
     margin: 24px 0;
@@ -72,8 +71,6 @@ p {
 }
 
 a {
-  color: currentColor;
-
   &:focus {
     opacity: 0.8;
     outline: none;
@@ -126,18 +123,6 @@ svg {
       padding: 0.25rem 0.5rem;
       border-radius: 4px;
     }
-
-    .admin {
-      color: rgb(0, 0, 0);
-      background: rgb(1000, 1000, 1000);
-      border: 1px solid rgb(0, 0, 0);
-    }
-
-    .docs {
-      color: rgb(1000, 1000, 1000);
-      background: rgb(0, 0, 0);
-      border: 1px solid rgb(1000, 1000, 1000);
-    }
   }
 
   .footer {
@@ -165,12 +150,12 @@ svg {
 
 nav {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  color: black;
 
-  padding: 24px 45px;
-  max-width: 1024px;
+  align-items: center;
+  color: #333;
+
+  padding: 20px 20px 30px 60px;
+  max-width: 1360px;
   margin: 0 auto;
 
   @media (max-width: 400px) {
@@ -179,7 +164,7 @@ nav {
 
   a {
     text-decoration: none;
-    color: rgb(1000, 1000, 1000);
+    color: #333;
   }
 
   .logo {
@@ -195,32 +180,30 @@ nav {
       padding: 0.25rem 0.5rem;
       border-radius: 4px;
     }
-
-    .admin {
-      color: rgb(0, 0, 0);
-      background: rgb(1000, 1000, 1000);
-      border: 1px solid rgb(0, 0, 0);
-    }
-
-    .docs {
-      color: rgb(1000, 1000, 1000);
-      background: rgb(0, 0, 0);
-      border: 1px solid rgb(1000, 1000, 1000);
-    }
   }
 
   ul {
     display: flex;
+    font-size: 12px;
+    font-weight: 500;
+    padding: 0;
+    line-height: 28px;
+    margin-left: 90px;
+    margin-top: 30px;
 
     list-style: none;
 
     li {
-      padding: 0px 10px;
-      border-right: 1px solid black;
+      padding: 0px 20px;
+      border-right: 1px solid #333;
     }
 
     li:last-child {
       border-right: none;
     }
   }
+}
+
+.artwork {
+  color: #333;
 }
