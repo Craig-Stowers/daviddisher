@@ -1,7 +1,8 @@
 import React, { cache } from 'react'
 import configPromise from '@payload-config'
 import { getPayload } from 'payload'
-//import { AlbumProvider } from '../../AlbumProvider'
+import { AlbumProvider } from '../../AlbumProvider'
+import ImageViewer from './image/[imageId]/_components/ImageViewer'
 
 import GalleryServer from '../../_gallery/GalleryServer'
 
@@ -25,9 +26,11 @@ export default async function AlbumLayout(props) {
   const newParams = await props.params
 
   const album = (await queryAlbumBySlug({ slug: newParams.slug })) || null
+  //const slug = newParams.slug
+
+  console.log('reload album', album)
 
   return (
-    // <AlbumProvider album={{ images: album.images, slug: slug, pendingImage: pendingImageNumber }}>
     <div className="relative">
       <GalleryServer images={album.images} gallerySlug={newParams.slug} />
 
@@ -41,11 +44,13 @@ export default async function AlbumLayout(props) {
           pointerEvents: 'none',
         }}
       >
-        {props.children}
-      </div>
+        {/* {props.children} */}
 
-      {/* {props.viewer} */}
+        <AlbumProvider albumData={album}>
+          {props.children}
+          <ImageViewer />
+        </AlbumProvider>
+      </div>
     </div>
-    // </AlbumProvider>
   )
 }

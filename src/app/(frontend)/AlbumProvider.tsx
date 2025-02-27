@@ -1,5 +1,5 @@
 'use client'
-import { createContext, useContext } from 'react'
+import { createContext, useContext, useState } from 'react'
 
 // Define type for image items
 export interface ImageItem {
@@ -21,10 +21,16 @@ export interface AlbumDataType {
 const AlbumContext = createContext(null)
 
 // Provider component to wrap the app
-export function AlbumProvider({ children, album }) {
+export function AlbumProvider({ children, albumData }) {
+  const [album, setAlbum] = useState(albumData)
+  const [selectedIndex, setSelectedIndex] = useState(null)
   // const [album, setAlbum] = useState({ slug: null, images: [] })
 
-  return <AlbumContext.Provider value={album}>{children}</AlbumContext.Provider>
+  return (
+    <AlbumContext.Provider value={{ album, setAlbum, selectedIndex, setSelectedIndex }}>
+      {children}
+    </AlbumContext.Provider>
+  )
 }
 
 // Hook to use the album context
