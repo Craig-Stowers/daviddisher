@@ -11,6 +11,8 @@ export default function ImagePage({}) {
   const imageId = params.imageId
   const imageIdNumber = Number(imageId)
 
+  console.log('front received imageIdNumber', imageIdNumber)
+
   useEffect(() => {
     setSelectedIndex(imageIdNumber) // Update provider when URL changes
   }, [imageIdNumber, setSelectedIndex])
