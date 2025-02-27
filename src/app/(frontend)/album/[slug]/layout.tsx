@@ -27,9 +27,9 @@ export default async function AlbumLayout(props: {
 }) {
   const { slug = 'home' } = await props.params
 
-  // const headersList = headers() // Get server headers
-  // const pendingImage = (await headersList).get('x-image-id') // Read header
-  // console.log('layout pending', pendingImage)
+  const headersList = headers() // Get server headers
+  const pendingImage = (await headersList).get('x-image-id') // Read header
+  console.log('layout pending', pendingImage)
 
   const album = (await queryAlbumBySlug({ slug })) || null
 

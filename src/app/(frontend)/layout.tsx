@@ -6,6 +6,8 @@ export const metadata = {
   title: 'David Disher Art',
 }
 
+import Link from 'next/link'
+
 // export default async function RootLayout(props: { children: React.ReactNode }) {
 //   const { children } = props
 
@@ -25,6 +27,9 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
         <nav>
           <h1>David Disher</h1>
           <ul>
+            <li>
+              <Link href="/album/2000s">TEST</Link>
+            </li>
             <li>Artwork</li>
             <li>Biography</li>
             <li>Links</li>
