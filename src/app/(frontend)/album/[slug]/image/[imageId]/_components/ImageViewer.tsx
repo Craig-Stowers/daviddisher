@@ -140,7 +140,7 @@ export default function ImageViewer({}) {
               fontSize: '3.5rem',
             }}
           >
-            <Link href={`/album/${album.slug}/image/${prevIndex}`}>
+            <Link href={`/album/${album.slug}/image/${nextIndex}`}>
               <RiArrowRightSLine />
             </Link>
           </div>

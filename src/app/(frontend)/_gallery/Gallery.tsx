@@ -12,8 +12,6 @@ export default function Gallery({ gallerySlug }: { gallerySlug: string }) {
 
   const router = useRouter()
 
-  console.log('album with pending', pendingImage)
-
   useEffect(() => {
     if (pendingImage !== null) {
       router.push(`/album/${gallerySlug}`)
