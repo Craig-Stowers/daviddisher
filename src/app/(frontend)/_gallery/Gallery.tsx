@@ -17,9 +17,9 @@ export default function Gallery({ gallerySlug }: { gallerySlug: string }) {
   useEffect(() => {
     if (pendingImage !== null) {
       router.push(`/album/${gallerySlug}`)
-      // setTimeout(() => {
-      router.push(`/album/${gallerySlug}/image/${pendingImage}`)
-      // }, 2000)
+      setTimeout(() => {
+        router.push(`/album/${gallerySlug}/image/${pendingImage}`)
+      }, 3000)
       // Find the matching <Link> in the DOM and trigger a click
     }
   }, [pendingImage, router, gallerySlug])
