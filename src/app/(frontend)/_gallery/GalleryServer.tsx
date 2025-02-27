@@ -5,14 +5,6 @@ import styles from './Gallery.module.css'
 // Define type for image items
 import type { StaticImageData } from 'next/image'
 
-interface ImageItem {
-  id: string
-  url?: string
-  width?: number
-  height?: number
-  alt?: string
-}
-
 export default function GalleryServer({ images, gallerySlug }) {
   console.log('GALLERY SERVER', gallerySlug)
   return (

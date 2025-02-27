@@ -2,7 +2,7 @@ import React, { cache } from 'react'
 import configPromise from '@payload-config'
 import { getPayload } from 'payload'
 //import { AlbumProvider } from '../../AlbumProvider'
-import { headers } from 'next/headers' // Read server-side headers
+
 import GalleryServer from '../../_gallery/GalleryServer'
 
 const queryAlbumBySlug = cache(async ({ slug }: { slug: string }) => {
@@ -21,18 +21,10 @@ const queryAlbumBySlug = cache(async ({ slug }: { slug: string }) => {
   return result.docs?.[0] || null
 })
 
-export default async function AlbumLayout(props: {
-  children: React.ReactNode
-  viewer: React.ReactNode
-  params: Promise<{ slug?: string }>
-}) {
+export default async function AlbumLayout(props) {
   const newParams = await props.params
 
-  console.log('props.params', newParams)
-
   const album = (await queryAlbumBySlug({ slug: newParams.slug })) || null
-
-  console.log('layout slug', newParams.slug)
 
   return (
     // <AlbumProvider album={{ images: album.images, slug: slug, pendingImage: pendingImageNumber }}>
