@@ -1,73 +1,53 @@
 'use client'
-
-import Image from 'next/image'
+import { useEffect, useRef } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import styles from './Gallery.module.css'
-import { useRouter } from 'next/navigation'
-import { useEffect } from 'react'
-// Define type for image items
-import type { StaticImageData } from 'next/image'
 import { useAlbum } from '../AlbumProvider'
 
 export default function Gallery({ gallerySlug }: { gallerySlug: string }) {
   const { images, pendingImage } = useAlbum()
-  const router = useRouter()
+  const thumbRefs = useRef<(HTMLAnchorElement | null)[]>([]) // Store refs for Links
 
   console.log('album with pending', pendingImage)
 
   useEffect(() => {
     if (pendingImage !== null) {
-      // Navigate to intercepted route to load the viewer
-      console.log('redirect now to', `/album/${gallerySlug}/image/${pendingImage}`)
-      //router.replace(`/album/${gallerySlug}/image/${pendingImage}`)
-      setTimeout(() => {
-        router.push(`/album/${gallerySlug}/image/${pendingImage}`)
-      }, 1000)
+      // Find the matching <Link> in the DOM and trigger a click
+      const linkToClick = thumbRefs.current[pendingImage] // Assuming `pendingImage` is an index
+      if (linkToClick) {
+        linkToClick.click() // Simulate user clicking the link
+      }
     }
-  }, [pendingImage, router, gallerySlug])
-
-  // const { setAlbum } = useAlbum()
-
-  // useEffect(() => {
-  //   setAlbum({ slug: gallerySlug, images, index: 0 })
-  // }, [gallerySlug, images, setAlbum])
+  }, [pendingImage])
 
   return (
     <div>
       <div className={styles.gallery} style={{ display: 'flex', flexWrap: 'wrap' }}>
         {images?.map((item, i) => {
-          // If item is a string, it's an ID, so we can't use it directly
           if (typeof item === 'string') {
-            return <p key={item}>Loading image...</p> // Handle missing data gracefully
+            return <p key={item}>Loading image...</p>
           }
 
-          // Ensure src is always a valid string
-          const src: StaticImageData | string = item.url || '/fallback.jpg'
-          // const width = item.width ?? 100 // Default width if missing
-          // const height = item.height ?? 100 // Default height if missing
+          const src = item.url || '/fallback.jpg'
           const alt = item.alt || 'Default image'
 
           return (
-            <div
-              className={styles.cardContainer}
-              key={item.id}
-              // onMouseEnter={() => router.prefetch(`/album/${gallerySlug}/image/${i}`)}
-            >
+            <div className={styles.cardContainer} key={item.id}>
               <div className={styles.card}>
-                <Link className="card" href={`/album/${gallerySlug}/image/${i}`} passHref>
+                <Link
+                  href={`/album/${gallerySlug}/image/${i}`}
+                  passHref
+                  ref={(el) => (thumbRefs.current[i] = el)} // Store the Link ref
+                >
                   <Image
                     src={src}
-                    // width={width}
-                    // height={height}
-                    // width={180}
-                    // height={180}
                     layout="fill"
                     objectFit="cover"
                     alt={alt}
                     placeholder="blur"
                     blurDataURL="data:image/png;base64,..." // Optional placeholder
                     quality={50}
-                    // loading="lazy"
                     sizes="(max-width: 640px) 50vw, (max-width: 1024px) 25vw, 20vw"
                   />
                 </Link>

@@ -1,5 +1,5 @@
-import { redirect } from 'next/navigation'
-import { headers } from 'next/headers' // Access Next.js headers API
+// import { redirect } from 'next/navigation'
+// import { headers } from 'next/headers' // Access Next.js headers API
 
 export default async function ImagePage({ params }) {
   return null
