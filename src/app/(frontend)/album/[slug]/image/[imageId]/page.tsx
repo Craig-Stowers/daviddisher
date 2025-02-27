@@ -9,7 +9,7 @@ export default function ImagePage({}) {
   const params = useParams() // Get the route parameters
 
   const imageId = params.imageId
-  const imageIdNumber = parseInt(imageId)
+  const imageIdNumber = Number(imageId)
 
   useEffect(() => {
     setSelectedIndex(imageIdNumber) // Update provider when URL changes
