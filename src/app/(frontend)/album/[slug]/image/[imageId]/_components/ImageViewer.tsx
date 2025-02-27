@@ -1,6 +1,6 @@
 'use client'
 
-// import Image from 'next/image'
+import Image from 'next/image'
 import { useAlbum } from '@/app/(frontend)/AlbumProvider'
 
 import { useEffect, useState } from 'react'
@@ -10,6 +10,9 @@ export default function ImageViewer({}) {
 
   const { images, selectedIndex } = useAlbum()
 
+  const src = images[selectedIndex].url || '/fallback.jpg'
+  const alt = images[selectedIndex].alt || 'Default image'
+
   useEffect(() => {
     if (!images || !images[selectedIndex]) return
     console.log('ImageViewer - useEffect', selectedIndex, oldUrl)
@@ -18,8 +21,7 @@ export default function ImageViewer({}) {
 
   return (
     <div style={{ color: 'black' }}>
-      <p>ImageViewer - {selectedIndex}</p>
-      {/* <Image src={image.url} layout="fill" objectFit="contain" alt={image.alt} /> */}
+      <Image src={src} layout="fill" objectFit="contain" alt={alt} />
     </div>
   )
 }

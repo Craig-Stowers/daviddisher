@@ -16,11 +16,22 @@ export default async function ImageLayout({ children, params }) {
   //const images = albumData.images
 
   return (
-    <div className="image-layout">
-      <h1>Album: {slug}</h1>
+    <div
+      className="image-layout"
+      style={{
+        color: 'black',
+        backgroundColor: 'rgba(0,0,0,0.8)',
+        height: '100%',
+        width: '100%',
+        top: 0,
+        position: 'fixed',
+      }}
+    >
       <AlbumProvider album={{ images: albumData.images, slug, selectedIndex: imageIdNumber }}>
-        <ImageNavigation images={albumData.images} slug={slug} imageId={imageIdNumber} />
         <ImageViewer />
+        <div style={{ position: 'absolute' }}>
+          <ImageNavigation images={albumData.images} slug={slug} imageId={imageIdNumber} />
+        </div>
       </AlbumProvider>
 
       {/* <div className="image-container">{children}</div> */}
