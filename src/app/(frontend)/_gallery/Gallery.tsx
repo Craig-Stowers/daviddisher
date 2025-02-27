@@ -3,16 +3,13 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import styles from './Gallery.module.css'
-import { useEffect } from 'react'
-
+//import router from 'next/navigation'
 // Define type for image items
 import type { StaticImageData } from 'next/image'
 import { useAlbum } from '../AlbumProvider'
-import { useRouter } from 'next/navigation'
 
-export default function Gallery({ gallerySlug }: { gallerySlug: string; pendingImage: number }) {
+export default function Gallery({ gallerySlug }: { gallerySlug: string }) {
   const { images } = useAlbum()
-  const router = useRouter()
 
   // useEffect(() => {
   //   if (pendingImage) {
@@ -47,7 +44,7 @@ export default function Gallery({ gallerySlug }: { gallerySlug: string; pendingI
             <div
               className={styles.cardContainer}
               key={item.id}
-              onMouseEnter={() => router.prefetch(`/album/${gallerySlug}/image/${i}`)}
+              // onMouseEnter={() => router.prefetch(`/album/${gallerySlug}/image/${i}`)}
             >
               <div className={styles.card}>
                 <Link className="card" href={`/album/${gallerySlug}/image/${i}`} passHref>

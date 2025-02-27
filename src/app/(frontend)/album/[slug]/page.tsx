@@ -2,7 +2,6 @@ import React, { cache } from 'react'
 import configPromise from '@payload-config'
 import { getPayload } from 'payload'
 import { notFound } from 'next/navigation'
-import { headers } from 'next/headers' // Read server-side headers
 
 import Gallery from '../../_gallery/Gallery'
 
@@ -14,29 +13,25 @@ type Args = {
   }>
 }
 
-export async function generateStaticParams() {
-  const payload = await getPayload({ config: configPromise })
+// export async function generateStaticParams() {
+//   const payload = await getPayload({ config: configPromise })
 
-  const albums = await payload.find({
-    collection: 'albums',
-    depth: 1,
-  })
+//   const albums = await payload.find({
+//     collection: 'albums',
+//     depth: 1,
+//   })
 
-  return albums.docs.map((album) => ({
-    params: {
-      slug: album.slug,
-    },
-  }))
-}
+//   return albums.docs.map((album) => ({
+//     params: {
+//       slug: album.slug,
+//     },
+//   }))
+// }
 
 export default async function AlbumPage({ params: paramsPromise }: Args) {
   const { slug = 'home' } = await paramsPromise
 
-  const headersList = headers() // Get server headers
-  const pendingImage = (await headersList).get('x-image-id') // Read header
-  console.log('pendingImage', pendingImage)
-
-  const pendingImageNumber = pendingImage ? parseInt(pendingImage) : null
+  // const pendingImageNumber = pendingImage ? parseInt(pendingImage) : null
 
   // const album = (await queryAlbumBySlug({ slug })) || null
 
@@ -50,7 +45,7 @@ export default async function AlbumPage({ params: paramsPromise }: Args) {
 
       <Gallery
         gallerySlug={slug}
-        pendingImage={pendingImageNumber}
+
         // images={(album.images ?? []).filter((item): item is Media => typeof item !== 'string')}
       />
 
