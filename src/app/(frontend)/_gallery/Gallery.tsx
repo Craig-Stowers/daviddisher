@@ -20,7 +20,9 @@ export default function Gallery({ gallerySlug }: { gallerySlug: string }) {
       // Navigate to intercepted route to load the viewer
       console.log('redirect now to', `/album/${gallerySlug}/image/${pendingImage}`)
       //router.replace(`/album/${gallerySlug}/image/${pendingImage}`)
-      router.push(`/album/${gallerySlug}/image/${pendingImage}`)
+      setTimeout(() => {
+        router.push(`/album/${gallerySlug}/image/${pendingImage}`)
+      }, 1000)
     }
   }, [pendingImage, router, gallerySlug])
 
