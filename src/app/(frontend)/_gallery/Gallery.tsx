@@ -4,25 +4,28 @@ import Link from 'next/link'
 import Image from 'next/image'
 import styles from './Gallery.module.css'
 import { useAlbum } from '../AlbumProvider'
+import { useRouter } from 'next/navigation'
 
 export default function Gallery({ gallerySlug }: { gallerySlug: string }) {
   const { images, pendingImage } = useAlbum()
   const thumbRefs = useRef<(HTMLAnchorElement | null)[]>([]) // Store refs for Links
 
+  const router = useRouter()
+
   console.log('album with pending', pendingImage)
 
   useEffect(() => {
     if (pendingImage !== null) {
-      setTimeout(() => {
-        const linkToClick = thumbRefs.current[pendingImage] // Assuming `pendingImage` is an index
-        if (linkToClick) {
-          linkToClick.click() // Simulate user clicking the link
-        }
-      }, 1000)
-
+      router.push(`/album/${gallerySlug}`)
+      // setTimeout(() => {
+      //   const linkToClick = thumbRefs.current[pendingImage] // Assuming `pendingImage` is an index
+      //   if (linkToClick) {
+      //     linkToClick.click() // Simulate user clicking the link
+      //   }
+      // }, 2000)
       // Find the matching <Link> in the DOM and trigger a click
     }
-  }, [pendingImage])
+  }, [pendingImage, router, gallerySlug])
 
   return (
     <div>
