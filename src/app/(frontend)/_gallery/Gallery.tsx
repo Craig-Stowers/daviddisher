@@ -18,10 +18,7 @@ export default function Gallery({ gallerySlug }: { gallerySlug: string }) {
     if (pendingImage !== null) {
       router.push(`/album/${gallerySlug}`)
       // setTimeout(() => {
-      //   const linkToClick = thumbRefs.current[pendingImage] // Assuming `pendingImage` is an index
-      //   if (linkToClick) {
-      //     linkToClick.click() // Simulate user clicking the link
-      //   }
+      router.push(`/album/${gallerySlug}/image/${pendingImage}`)
       // }, 2000)
       // Find the matching <Link> in the DOM and trigger a click
     }
