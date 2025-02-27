@@ -3,23 +3,25 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import styles from './Gallery.module.css'
-//import router from 'next/navigation'
+import { useRouter } from 'next/navigation'
+import { useEffect } from 'react'
 // Define type for image items
 import type { StaticImageData } from 'next/image'
 import { useAlbum } from '../AlbumProvider'
 
 export default function Gallery({ gallerySlug }: { gallerySlug: string }) {
   const { images, pendingImage } = useAlbum()
+  const router = useRouter()
 
   console.log('album with pending', pendingImage)
 
-  // useEffect(() => {
-  //   if (pendingImage) {
-  //     // Navigate to intercepted route to load the viewer
-  //     router.replace(`/album/${gallerySlug}/image/${pendingImage}`)
-  //     // router.push(`/album/${gallerySlug}/image/${pendingImage}`, { shallow: true })
-  //   }
-  // }, [pendingImage, router, gallerySlug])
+  useEffect(() => {
+    if (pendingImage) {
+      // Navigate to intercepted route to load the viewer
+      router.replace(`/album/${gallerySlug}/image/${pendingImage}`)
+      //router.push(`/album/${gallerySlug}/image/${pendingImage}`, { shallow: true })
+    }
+  }, [pendingImage, router, gallerySlug])
 
   // const { setAlbum } = useAlbum()
 
