@@ -16,9 +16,10 @@ export default function Gallery({ gallerySlug }: { gallerySlug: string }) {
   console.log('album with pending', pendingImage)
 
   useEffect(() => {
-    if (pendingImage) {
+    if (pendingImage !== null) {
       // Navigate to intercepted route to load the viewer
-      router.replace(`/album/${gallerySlug}/image/${pendingImage}`)
+      console.log('redirect now to', `/album/${gallerySlug}/image/${pendingImage}`)
+      //router.replace(`/album/${gallerySlug}/image/${pendingImage}`)
       //router.push(`/album/${gallerySlug}/image/${pendingImage}`, { shallow: true })
     }
   }, [pendingImage, router, gallerySlug])
