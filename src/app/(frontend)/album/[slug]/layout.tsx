@@ -32,7 +32,6 @@ export default async function AlbumLayout(props) {
     <div className="relative">
       <GalleryServer
         images={album.images}
-        gallerySlug={newParams.slug}
         getUrlFromIndex={(index) => {
           return `/album/${newParams.slug}/image/${index}`
         }}
