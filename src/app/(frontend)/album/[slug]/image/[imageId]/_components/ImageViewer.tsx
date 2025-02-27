@@ -1,6 +1,9 @@
 'use client'
 import Image from 'next/image'
 import { useAlbum } from '@/app/(frontend)/AlbumProvider'
+import { RiArrowLeftSLine } from 'react-icons/ri'
+import { RiArrowRightSLine } from 'react-icons/ri'
+import { IoCloseSharp } from 'react-icons/io5'
 
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
@@ -26,7 +29,7 @@ export default function ImageViewer({}) {
       timer = setTimeout(() => {
         console.log('SHOW IT!')
         setShowImage(true)
-      }, 260)
+      }, 340)
 
       return () => {
         clearTimeout(timer)
@@ -37,7 +40,7 @@ export default function ImageViewer({}) {
       timer = setTimeout(() => {
         setCurrentImageIndex(selectedIndex)
         setShowImage(true)
-      }, 260)
+      }, 340)
 
       return () => {
         clearTimeout(timer)
@@ -76,37 +79,100 @@ export default function ImageViewer({}) {
         left: 0,
         width: '100%',
         height: '100%',
-        color: 'black',
+        color: '#dfdfdf',
         transition: 'opacity 0.25s',
-        backgroundColor: 'rgba(0,0,0,0.8)',
+        backgroundColor: 'rgba(0,0,0,0.88)',
         pointerEvents: showViewer ? 'all' : 'none',
         opacity: showViewer ? 1 : 0,
       }}
     >
-      IMAGE VIEWER HERE: {selectedIndex}
       <div
         style={{
           position: 'absolute',
-          width: '70%',
-          height: '70%',
-          opacity: showImage ? 1 : 0,
-          transition: 'opacity 0.25s',
+          left: '50%',
+          top: '50%',
+          transform: 'translate(-50%, -50%)',
+          width: 'calc(100% - 80px)',
+          height: 'calc(100% - 80px)',
+
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          flexDirection: 'column',
         }}
       >
-        <Image src={src} layout="fill" objectFit="contain" alt={alt} />
-      </div>
-      <div style={{ position: 'absolute', bottom: 0, left: 0, color: 'white' }}>
-        <Link href={`/album/${album.slug}/image/${prevIndex}`}>PREV IMAGE</Link>
-        <Link href={`/album/${album.slug}/image/${nextIndex}`}>NEXT IMAGE</Link>
-        <Link
-          href={`/album/${album.slug}`}
-          onClick={() => {
-            setShowImage(false)
-            setSelectedIndex(null)
+        <div
+          style={{
+            width: '100%',
+            height: 'calc(100% - 20px)',
+            position: 'relative',
           }}
         >
-          CLOSE
-        </Link>
+          <div
+            style={{
+              position: 'relative',
+              height: '100%',
+
+              opacity: showImage ? 1 : 0,
+              transition: 'opacity 0.25s',
+            }}
+          >
+            <Image src={src} layout="fill" objectFit="contain" alt={alt} />
+          </div>
+          <div
+            style={{
+              position: 'absolute',
+              top: '50%',
+              transform: 'translate(0%, -50%)',
+              left: 0,
+
+              fontSize: '3.5rem',
+            }}
+          >
+            <Link href={`/album/${album.slug}/image/${prevIndex}`}>
+              <RiArrowLeftSLine />
+            </Link>
+          </div>
+          <div
+            style={{
+              position: 'absolute',
+              top: '50%',
+              transform: 'translate(0%, -50%)',
+              right: 0,
+
+              fontSize: '3.5rem',
+            }}
+          >
+            <Link href={`/album/${album.slug}/image/${prevIndex}`}>
+              <RiArrowRightSLine />
+            </Link>
+          </div>
+        </div>
+        <div style={{ position: 'absolute', top: 0, right: 0, fontSize: '2.5rem' }}>
+          <Link
+            href={`/album/${album.slug}`}
+            onClick={() => {
+              setShowImage(false)
+              setSelectedIndex(null)
+            }}
+          >
+            <IoCloseSharp />
+          </Link>
+        </div>
+
+        <div
+          style={{
+            height: '50px',
+
+            fontSize: 14,
+            fontWeight: 400,
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}
+        >
+          <p style={{ margin: 0, padding: 0, lineHeight: 20 }}>{alt}</p>
+        </div>
       </div>
     </div>
   )
