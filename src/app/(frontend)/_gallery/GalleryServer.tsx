@@ -13,13 +13,8 @@ interface ImageItem {
   alt?: string
 }
 
-export default function GalleryServer({
-  images,
-  gallerySlug,
-}: {
-  images: ImageItem[]
-  gallerySlug: string
-}) {
+export default function GalleryServer({ images, gallerySlug }) {
+  console.log('GALLERY SERVER', gallerySlug)
   return (
     <div>
       <div className={styles.gallery} style={{ display: 'flex', flexWrap: 'wrap' }}>

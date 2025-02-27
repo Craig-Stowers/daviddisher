@@ -37,6 +37,8 @@ export default async function AlbumPage({ params: paramsPromise }: Args) {
 
   // if (!album) return notFound()
 
+  return null
+
   // if (!album) return notFound(); // Show 404 if album isn't found
 
   return (

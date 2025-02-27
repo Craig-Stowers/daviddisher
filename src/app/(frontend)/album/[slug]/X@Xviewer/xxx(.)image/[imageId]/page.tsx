@@ -8,7 +8,8 @@ export default async function PhotoModal(props) {
 
   return (
     <div style={{ color: 'black' }}>
-      <ImageViewer index={index} slug={slug} />
+      <h1>PHOTO HERE</h1>
+      {/* <ImageViewer index={index} slug={slug} /> */}
     </div>
   )
 }

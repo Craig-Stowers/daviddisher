@@ -1,23 +1,13 @@
-// import { redirect } from 'next/navigation'
-// import { headers } from 'next/headers' // Access Next.js headers API
+import ImageViewer from './_components/ImageViewer'
+import { getAlbumData } from '@/lib/fetchAlbum'
 
 export default async function ImagePage({ params }) {
-  return null
-  // const album = (await params).slug
-  // const imageId = (await params).imageId
+  const { slug, imageId } = await params
 
-  // const response = new Response(null, {
-  //   headers: { 'x-image-id': imageId },
-  // })
+  // Fetch album data server-side
+  const albumData = await getAlbumData({ slug })
+  const images = albumData.images
+  const currentImage = images[parseInt(imageId)]
 
-  // //const image = await fetchImageDetails(params.imageSlug);
-
-  // redirect(`/album/${'2000s'}`, response)
-
-  // return (
-  //   <div className="full-page-image">
-  //     <h5>YOU&apos;RE LOADING IMAGE - {imageId}</h5>
-  //     {/* <img src={image.src} alt={image.title} /> */}
-  //   </div>
-  // )
+  return <ImageViewer key={'viewer'} image={currentImage} />
 }

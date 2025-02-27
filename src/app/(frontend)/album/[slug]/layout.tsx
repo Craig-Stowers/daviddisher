@@ -1,8 +1,9 @@
 import React, { cache } from 'react'
 import configPromise from '@payload-config'
 import { getPayload } from 'payload'
-import { AlbumProvider } from '../../AlbumProvider'
+//import { AlbumProvider } from '../../AlbumProvider'
 import { headers } from 'next/headers' // Read server-side headers
+import GalleryServer from '../../_gallery/GalleryServer'
 
 const queryAlbumBySlug = cache(async ({ slug }: { slug: string }) => {
   const payload = await getPayload({ config: configPromise })
@@ -25,21 +26,34 @@ export default async function AlbumLayout(props: {
   viewer: React.ReactNode
   params: Promise<{ slug?: string }>
 }) {
-  const { slug = 'home' } = await props.params
+  const newParams = await props.params
 
-  const headersList = headers() // Get server headers
-  const pendingImage = (await headersList).get('x-image-id') // Read header
-  const pendingImageNumber = pendingImage ? parseInt(pendingImage) : null
+  console.log('props.params', newParams)
 
-  const album = (await queryAlbumBySlug({ slug })) || null
+  const album = (await queryAlbumBySlug({ slug: newParams.slug })) || null
+
+  console.log('layout slug', newParams.slug)
 
   return (
-    <AlbumProvider album={{ images: album.images, slug: slug, pendingImage: pendingImageNumber }}>
-      <div className="relative">
-        {/* <GalleryServer images={album.images} slug={slug} /> */}
+    // <AlbumProvider album={{ images: album.images, slug: slug, pendingImage: pendingImageNumber }}>
+    <div className="relative">
+      <GalleryServer images={album.images} gallerySlug={newParams.slug} />
+
+      <div
+        style={{
+          position: 'fixed',
+          left: 0,
+          top: 0,
+          width: '100vw',
+          height: '100vh',
+          pointerEvents: 'none',
+        }}
+      >
         {props.children}
-        {props.viewer}
       </div>
-    </AlbumProvider>
+
+      {/* {props.viewer} */}
+    </div>
+    // </AlbumProvider>
   )
 }

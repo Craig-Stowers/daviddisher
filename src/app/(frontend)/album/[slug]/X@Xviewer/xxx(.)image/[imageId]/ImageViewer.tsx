@@ -26,7 +26,6 @@ const ImageViewer = ({ index, slug }) => {
   }, [loaded])
 
   useEffect(() => {
-    console.log('prefetching', nextIndex, prevIndex)
     if (nextIndex) router.prefetch(`/album/currentAlbum/image/${nextIndex}`)
     if (prevIndex) router.prefetch(`/album/currentAlbum/image/${prevIndex}`)
   }, [index])

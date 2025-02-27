@@ -13,8 +13,6 @@ export function middleware(req) {
     const album = url.pathname.split('/')[2]
     const imageId = url.pathname.split('/')[4]
 
-    console.log(`Middleware rewriting. Image ID: ${imageId}`)
-
     // Instead of redirecting, rewrite the request to `/album/[slug]`
     const response = NextResponse.rewrite(new URL(`/album/${album}`, req.url))
     response.headers.set('x-image-id', imageId) // Keep image ID in headers
