@@ -25,6 +25,12 @@ const ImageViewer = ({ index, slug }) => {
     // }, 10)
   }, [loaded])
 
+  useEffect(() => {
+    console.log('prefetching', nextIndex, prevIndex)
+    if (nextIndex) router.prefetch(`/album/currentAlbum/image/${nextIndex}`)
+    if (prevIndex) router.prefetch(`/album/currentAlbum/image/${prevIndex}`)
+  }, [index])
+
   const nextImage = () => {
     setFadeIn(false)
 
@@ -60,7 +66,7 @@ const ImageViewer = ({ index, slug }) => {
           position: 'absolute',
           width: '100vw',
           height: '100vh',
-          padding: '40px',
+          padding: '40px 100px',
           boxSizing: 'border-box',
         }}
       >

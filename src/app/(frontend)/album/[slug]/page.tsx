@@ -2,6 +2,7 @@ import React, { cache } from 'react'
 import configPromise from '@payload-config'
 import { getPayload } from 'payload'
 import { notFound } from 'next/navigation'
+import { headers } from 'next/headers' // Read server-side headers
 
 type Media = {
   id: string
@@ -58,9 +59,13 @@ export async function generateStaticParams() {
 export default async function AlbumPage({ params: paramsPromise }: Args) {
   const { slug = 'home' } = await paramsPromise
 
-  const album = (await queryAlbumBySlug({ slug })) || null
+  const headersList = headers() // Get server headers
+  const pendingImage = (await headersList).get('x-image-id') // Read header
+  console.log('pendingImage', pendingImage)
 
-  if (!album) return notFound()
+  // const album = (await queryAlbumBySlug({ slug })) || null
+
+  // if (!album) return notFound()
 
   // if (!album) return notFound(); // Show 404 if album isn't found
 
@@ -70,7 +75,8 @@ export default async function AlbumPage({ params: paramsPromise }: Args) {
 
       <Gallery
         gallerySlug={slug}
-        images={(album.images ?? []).filter((item): item is Media => typeof item !== 'string')}
+        pendingImage={pendingImage}
+        // images={(album.images ?? []).filter((item): item is Media => typeof item !== 'string')}
       />
 
       {/* {album.images?.map((item) => {

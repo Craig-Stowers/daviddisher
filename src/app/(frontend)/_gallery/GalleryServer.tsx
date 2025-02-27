@@ -1,14 +1,9 @@
-'use client'
-
 import Image from 'next/image'
 import Link from 'next/link'
 import styles from './Gallery.module.css'
-import { useEffect } from 'react'
 
 // Define type for image items
 import type { StaticImageData } from 'next/image'
-import { useAlbum } from '../AlbumProvider'
-import { useRouter } from 'next/navigation'
 
 interface ImageItem {
   id: string
@@ -18,32 +13,13 @@ interface ImageItem {
   alt?: string
 }
 
-export default function Gallery({
+export default function GalleryServer({
+  images,
   gallerySlug,
-  pendingImage,
 }: {
+  images: ImageItem[]
   gallerySlug: string
-  pendingImage: number
 }) {
-  const { images } = useAlbum()
-  const router = useRouter()
-
-  console.log('load pendingImage', pendingImage)
-
-  useEffect(() => {
-    if (pendingImage) {
-      // Navigate to intercepted route to load the viewer
-      router.replace(`/album/${gallerySlug}/image/${pendingImage}`)
-      // router.push(`/album/${gallerySlug}/image/${pendingImage}`, { shallow: true })
-    }
-  }, [pendingImage, router, gallerySlug])
-
-  // const { setAlbum } = useAlbum()
-
-  // useEffect(() => {
-  //   setAlbum({ slug: gallerySlug, images, index: 0 })
-  // }, [gallerySlug, images, setAlbum])
-
   return (
     <div>
       <div className={styles.gallery} style={{ display: 'flex', flexWrap: 'wrap' }}>
@@ -60,11 +36,7 @@ export default function Gallery({
           const alt = item.alt || 'Default image'
 
           return (
-            <div
-              className={styles.cardContainer}
-              key={item.id}
-              onMouseEnter={() => router.prefetch(`/album/${gallerySlug}/image/${i}`)}
-            >
+            <div className={styles.cardContainer} key={item.id}>
               <div className={styles.card}>
                 <Link className="card" href={`/album/${gallerySlug}/image/${i}`} passHref>
                   <Image

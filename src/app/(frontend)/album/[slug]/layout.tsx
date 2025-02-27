@@ -2,6 +2,7 @@ import React, { cache } from 'react'
 import configPromise from '@payload-config'
 import { getPayload } from 'payload'
 import { AlbumProvider } from '../../AlbumProvider'
+import GalleryServer from '../../_gallery/GalleryServer'
 
 const queryAlbumBySlug = cache(async ({ slug }: { slug: string }) => {
   const payload = await getPayload({ config: configPromise })
@@ -25,18 +26,13 @@ export default async function AlbumLayout(props: {
   params: Promise<{ slug?: string }>
 }) {
   const { slug = 'home' } = await props.params
-  // console.log('album layout with params', slug)
-  // const router = useRouter();
-  // const isViewingImage = pathname.split("/").length > 3;
-  // Detect if in `[imageSlug]` route
 
   const album = (await queryAlbumBySlug({ slug })) || null
-
-  console.log('album', album.images)
 
   return (
     <AlbumProvider album={{ images: album.images, slug: slug }}>
       <div className="relative">
+        {/* <GalleryServer images={album.images} slug={slug} /> */}
         {props.children}
         {props.viewer}
       </div>
