@@ -10,33 +10,17 @@ import type { StaticImageData } from 'next/image'
 import { useAlbum } from '../AlbumProvider'
 import { useRouter } from 'next/navigation'
 
-interface ImageItem {
-  id: string
-  url?: string
-  width?: number
-  height?: number
-  alt?: string
-}
-
-export default function Gallery({
-  gallerySlug,
-  pendingImage,
-}: {
-  gallerySlug: string
-  pendingImage: number
-}) {
+export default function Gallery({ gallerySlug }: { gallerySlug: string; pendingImage: number }) {
   const { images } = useAlbum()
   const router = useRouter()
 
-  console.log('load pendingImage', pendingImage)
-
-  useEffect(() => {
-    if (pendingImage) {
-      // Navigate to intercepted route to load the viewer
-      router.replace(`/album/${gallerySlug}/image/${pendingImage}`)
-      // router.push(`/album/${gallerySlug}/image/${pendingImage}`, { shallow: true })
-    }
-  }, [pendingImage, router, gallerySlug])
+  // useEffect(() => {
+  //   if (pendingImage) {
+  //     // Navigate to intercepted route to load the viewer
+  //     router.replace(`/album/${gallerySlug}/image/${pendingImage}`)
+  //     // router.push(`/album/${gallerySlug}/image/${pendingImage}`, { shallow: true })
+  //   }
+  // }, [pendingImage, router, gallerySlug])
 
   // const { setAlbum } = useAlbum()
 

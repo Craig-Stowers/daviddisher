@@ -4,16 +4,6 @@ import { getPayload } from 'payload'
 import { notFound } from 'next/navigation'
 import { headers } from 'next/headers' // Read server-side headers
 
-type Media = {
-  id: string
-  url: string
-  width?: number
-  height?: number
-  alt: string
-  updatedAt: string
-  createdAt: string
-}
-
 import Gallery from '../../_gallery/Gallery'
 
 export const revalidate = 120 //
@@ -23,23 +13,6 @@ type Args = {
     slug?: string
   }>
 }
-
-const queryAlbumBySlug = cache(async ({ slug }: { slug: string }) => {
-  console.log('queryAlbumBySlug', slug)
-  const payload = await getPayload({ config: configPromise })
-
-  const result = await payload.find({
-    collection: 'albums',
-    where: {
-      slug: {
-        equals: slug,
-      },
-    },
-    depth: 2, // Ensures full media objects are returned instead of just IDs
-  })
-
-  return result.docs?.[0] || null
-})
 
 export async function generateStaticParams() {
   const payload = await getPayload({ config: configPromise })

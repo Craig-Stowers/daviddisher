@@ -2,7 +2,7 @@ import React, { cache } from 'react'
 import configPromise from '@payload-config'
 import { getPayload } from 'payload'
 import { AlbumProvider } from '../../AlbumProvider'
-import GalleryServer from '../../_gallery/GalleryServer'
+import { headers } from 'next/headers' // Read server-side headers
 
 const queryAlbumBySlug = cache(async ({ slug }: { slug: string }) => {
   const payload = await getPayload({ config: configPromise })
@@ -26,6 +26,10 @@ export default async function AlbumLayout(props: {
   params: Promise<{ slug?: string }>
 }) {
   const { slug = 'home' } = await props.params
+
+  // const headersList = headers() // Get server headers
+  // const pendingImage = (await headersList).get('x-image-id') // Read header
+  // console.log('layout pending', pendingImage)
 
   const album = (await queryAlbumBySlug({ slug })) || null
 
