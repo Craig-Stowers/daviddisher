@@ -27,7 +27,6 @@ export default function ImageViewer({}) {
     if (currentImageIndex == null && selectedIndex != null) {
       setCurrentImageIndex(selectedIndex)
       timer = setTimeout(() => {
-        console.log('SHOW IT!')
         setShowImage(true)
       }, 340)
 
@@ -68,8 +67,6 @@ export default function ImageViewer({}) {
   const prevIndex = selectedIndex > 0 ? selectedIndex - 1 : album.images.length - 1
 
   const showViewer = selectedIndex != null
-
-  console.log('currentImageIndex', currentImageIndex, album, showImage)
 
   return (
     <div
