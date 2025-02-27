@@ -13,11 +13,14 @@ export default function Gallery({ gallerySlug }: { gallerySlug: string }) {
 
   useEffect(() => {
     if (pendingImage !== null) {
+      setTimeout(() => {
+        const linkToClick = thumbRefs.current[pendingImage] // Assuming `pendingImage` is an index
+        if (linkToClick) {
+          linkToClick.click() // Simulate user clicking the link
+        }
+      }, 1000)
+
       // Find the matching <Link> in the DOM and trigger a click
-      const linkToClick = thumbRefs.current[pendingImage] // Assuming `pendingImage` is an index
-      if (linkToClick) {
-        linkToClick.click() // Simulate user clicking the link
-      }
     }
   }, [pendingImage])
 
