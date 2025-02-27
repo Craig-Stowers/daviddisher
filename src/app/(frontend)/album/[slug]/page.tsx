@@ -63,6 +63,8 @@ export default async function AlbumPage({ params: paramsPromise }: Args) {
   const pendingImage = (await headersList).get('x-image-id') // Read header
   console.log('pendingImage', pendingImage)
 
+  const pendingImageNumber = pendingImage ? parseInt(pendingImage) : null
+
   // const album = (await queryAlbumBySlug({ slug })) || null
 
   // if (!album) return notFound()
@@ -75,7 +77,7 @@ export default async function AlbumPage({ params: paramsPromise }: Args) {
 
       <Gallery
         gallerySlug={slug}
-        pendingImage={pendingImage}
+        pendingImage={pendingImageNumber}
         // images={(album.images ?? []).filter((item): item is Media => typeof item !== 'string')}
       />
 
