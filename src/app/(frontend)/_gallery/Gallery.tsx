@@ -9,7 +9,9 @@ import type { StaticImageData } from 'next/image'
 import { useAlbum } from '../AlbumProvider'
 
 export default function Gallery({ gallerySlug }: { gallerySlug: string }) {
-  const { images } = useAlbum()
+  const { images, pendingImage } = useAlbum()
+
+  console.log('album with pending', pendingImage)
 
   // useEffect(() => {
   //   if (pendingImage) {

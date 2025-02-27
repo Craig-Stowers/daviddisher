@@ -14,6 +14,7 @@ export interface ImageItem {
 export interface AlbumDataType {
   slug: string
   images: ImageItem[]
+  pending: number | null
 }
 
 // Create a context for the album

@@ -29,12 +29,12 @@ export default async function AlbumLayout(props: {
 
   const headersList = headers() // Get server headers
   const pendingImage = (await headersList).get('x-image-id') // Read header
-  console.log('layout pending', pendingImage)
+  const pendingImageNumber = pendingImage ? parseInt(pendingImage) : null
 
   const album = (await queryAlbumBySlug({ slug })) || null
 
   return (
-    <AlbumProvider album={{ images: album.images, slug: slug }}>
+    <AlbumProvider album={{ images: album.images, slug: slug, pendingImage: pendingImageNumber }}>
       <div className="relative">
         {/* <GalleryServer images={album.images} slug={slug} /> */}
         {props.children}
