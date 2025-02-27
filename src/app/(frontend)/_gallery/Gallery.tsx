@@ -38,7 +38,9 @@ export default function Gallery({ gallerySlug }: { gallerySlug: string }) {
                 <Link
                   href={`/album/${gallerySlug}/image/${i}`}
                   passHref
-                  ref={(el) => (thumbRefs.current[i] = el)} // Store the Link ref
+                  ref={(el) => {
+                    thumbRefs.current[i] = el
+                  }} // Store the Link ref
                 >
                   <Image
                     src={src}
