@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect } from 'react'
-import { useAlbum } from '@/app/(frontend)/AlbumProvider'
+import { useAlbum } from '@/app/(frontend)/artwork/album/[slug]/AlbumProvider'
 import { useParams } from 'next/navigation'
 export default function ImagePage({}) {
   const { setSelectedIndex } = useAlbum()

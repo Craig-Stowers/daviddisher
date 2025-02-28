@@ -1,6 +1,6 @@
 'use client'
 import Image from 'next/image'
-import { useAlbum } from '@/app/(frontend)/AlbumProvider'
+import { useAlbum } from '@/app/(frontend)/artwork/album/[slug]/AlbumProvider'
 import { RiArrowLeftSLine } from 'react-icons/ri'
 import { RiArrowRightSLine } from 'react-icons/ri'
 import { IoCloseSharp } from 'react-icons/io5'
@@ -51,7 +51,7 @@ export default function ImageViewer({}) {
   }, [selectedIndex, album, currentImageIndex])
 
   useEffect(() => {
-    console.log('IMAGE VIEWER album changed', album)
+    //  console.log('IMAGE VIEWER album changed', album)
   }, [album])
 
   const alt =
@@ -126,7 +126,7 @@ export default function ImageViewer({}) {
               fontSize: '3.5rem',
             }}
           >
-            <Link href={`/album/${album.slug}/image/${prevIndex}`}>
+            <Link href={`/artwork/album/${album.slug}/image/${prevIndex}`}>
               <RiArrowLeftSLine />
             </Link>
           </div>
@@ -140,14 +140,14 @@ export default function ImageViewer({}) {
               fontSize: '3.5rem',
             }}
           >
-            <Link href={`/album/${album.slug}/image/${nextIndex}`}>
+            <Link href={`/artwork/album/${album.slug}/image/${nextIndex}`}>
               <RiArrowRightSLine />
             </Link>
           </div>
         </div>
         <div style={{ position: 'absolute', top: 0, right: 0, fontSize: '2.5rem' }}>
           <Link
-            href={`/album/${album.slug}`}
+            href={`/artwork/album/${album.slug}`}
             onClick={() => {
               setShowImage(false)
               setSelectedIndex(null)

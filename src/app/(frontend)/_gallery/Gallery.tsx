@@ -3,7 +3,7 @@ import { useEffect, useRef } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import styles from './Gallery.module.css'
-import { useAlbum } from '../AlbumProvider'
+import { useAlbum } from '../artwork/album/[slug]/AlbumProvider'
 import { useRouter } from 'next/navigation'
 
 export default function Gallery({ gallerySlug }: { gallerySlug: string }) {

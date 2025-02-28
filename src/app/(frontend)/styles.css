@@ -148,62 +148,6 @@ svg {
   }
 }
 
-nav {
-  display: flex;
-
-  align-items: center;
-  color: #333;
-
-  padding: 20px 20px 30px 60px;
-  max-width: 1360px;
-  margin: 0 auto;
-
-  @media (max-width: 400px) {
-    padding: 24px;
-  }
-
-  a {
-    text-decoration: none;
-    color: #333;
-  }
-
-  .logo {
-    font-size: 24px;
-    font-weight: bold;
-  }
-
-  .links {
-    display: flex;
-    gap: 12px;
-
-    a {
-      padding: 0.25rem 0.5rem;
-      border-radius: 4px;
-    }
-  }
-
-  ul {
-    display: flex;
-    font-size: 12px;
-    font-weight: 500;
-    padding: 0;
-    line-height: 28px;
-    margin-left: 90px;
-    margin-top: 30px;
-
-    list-style: none;
-
-    li {
-      padding: 0px 20px;
-      border-right: 1px solid #333;
-    }
-
-    li:last-child {
-      border-right: none;
-    }
-  }
-}
-
 .artwork {
   color: #333;
 }

@@ -1,5 +1,6 @@
 import React from 'react'
 import './styles.css'
+import Nav from './_components/Nav'
 
 export const metadata = {
   description: 'Art by David Disher',
@@ -24,22 +25,8 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
   return (
     <html>
       <body>
-        <nav>
-          <h1>
-            <Link href="/">David Disher</Link>
-          </h1>
-          <ul>
-            <li>
-              <Link href="/artwork">ARTWORK</Link>
-            </li>
-            <li>
-              <Link href="/biography">BIOGRAPHY</Link>
-            </li>
-            <li>
-              <Link href="/contact">CONTACT</Link>
-            </li>
-          </ul>
-        </nav>
+        <Nav />
+
         {props.children}
 
         <div id="modal-root" />

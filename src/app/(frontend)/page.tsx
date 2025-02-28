@@ -37,27 +37,28 @@ export default async function HomePage() {
   return (
     <div className="home">
       <div className="content">
-        <h2>TESTING ALL MEDIA</h2>
-
         {media.docs.map((item: MediaItem) => {
           // Ensure src is always a valid string
-          const src: StaticImageData | string = item.url || '/fallback.jpg'
+          // const src: StaticImageData | string = item.url || '/fallback.jpg'
+          const src: StaticImageData | string = item.url || null
           const width = item.width ?? 100 // Default width if missing
           const height = item.height ?? 100 // Default height if missing
           const alt = item.alt || 'Default image'
 
           return (
-            <Image
-              key={item.id}
-              src={src}
-              width={width}
-              height={height}
-              alt={alt}
-              placeholder="blur"
-              blurDataURL="data:image/png;base64,..." // Optional placeholder
-              quality={100}
-              loading="lazy"
-            />
+            src && (
+              <Image
+                key={item.id}
+                src={src}
+                width={width}
+                height={height}
+                alt={alt}
+                placeholder="blur"
+                blurDataURL="data:image/png;base64,..." // Optional placeholder
+                quality={100}
+                loading="lazy"
+              />
+            )
           )
         })}
       </div>

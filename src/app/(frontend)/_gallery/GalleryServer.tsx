@@ -16,7 +16,7 @@ export default function GalleryServer({ images, getUrlFromIndex }) {
           }
 
           // Ensure src is always a valid string
-          const src: StaticImageData | string = item.url || '/fallback.jpg'
+          const src: StaticImageData | string = item.url || null
           // const width = item.width ?? 100 // Default width if missing
           // const height = item.height ?? 100 // Default height if missing
           const alt = item.alt || 'Default image'

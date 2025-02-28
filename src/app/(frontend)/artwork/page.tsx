@@ -7,9 +7,7 @@ export default async function Artwork() {
   const albums = await getAllAlbums()
 
   const images = albums.map((album) => album.coverImage)
-
   const slugs = albums.map((album) => album.slug)
-  console.log('images', images)
 
   return (
     <div className="artwork">
@@ -18,7 +16,7 @@ export default async function Artwork() {
         <GalleryServer
           images={images}
           getUrlFromIndex={(index) => {
-            return `/album/${slugs[index]}`
+            return `artwork/album/${slugs[index]}`
           }}
         />
       </div>
