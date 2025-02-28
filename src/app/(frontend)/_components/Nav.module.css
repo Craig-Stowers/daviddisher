@@ -2,7 +2,7 @@
   display: flex;
 
   align-items: center;
-  color: #333;
+  color: #222;
 
   padding: 20px 20px 30px 60px;
   max-width: 1360px;
@@ -24,12 +24,17 @@
 }
 
 .nav a {
+  font-weight: 600;
   text-decoration: none;
-  color: #333;
+  color: #222;
+  transition: all 0.3s ease;
 }
 
 .nav a:hover {
-  color: rgb(222, 38, 191);
+  color: var(--primary);
+}
+.nav .active a {
+  color: var(--primary);
 }
 
 .nav ul {
@@ -50,8 +55,4 @@
 
 .nav ul li:last-child {
   border-right: none;
-}
-
-.nav .active a {
-  color: rgb(222, 38, 191);
 }

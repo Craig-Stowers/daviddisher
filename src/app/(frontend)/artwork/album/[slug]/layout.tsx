@@ -12,6 +12,7 @@ export default async function AlbumLayout(props) {
 
   return (
     <div className="page">
+      <h2>{album.name}</h2>
       <GalleryServer
         images={album.images}
         getUrlFromIndex={(index) => {
@@ -23,21 +24,10 @@ export default async function AlbumLayout(props) {
         }}
       />
 
-      <div
-        style={{
-          position: 'fixed',
-          left: 0,
-          top: 0,
-          width: '100vw',
-          height: '100vh',
-          pointerEvents: 'none',
-        }}
-      >
-        <AlbumProvider albumData={album}>
-          {props.children}
-          <ImageViewer />
-        </AlbumProvider>
-      </div>
+      <AlbumProvider albumData={album}>
+        {props.children}
+        <ImageViewer />
+      </AlbumProvider>
     </div>
   )
 }

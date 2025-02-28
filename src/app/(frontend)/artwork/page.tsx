@@ -1,15 +1,12 @@
 import React from 'react'
-
 import { getAllAlbums } from '@/lib/getData'
-
 import GalleryServer from '@/app/(frontend)/_gallery/GalleryServer'
+
 export default async function Artwork() {
   const albums = await getAllAlbums()
   const images = albums.map((album) => album.coverImage)
   const slugs = albums.map((album) => album.slug)
   const titles = albums.map((album) => album.name)
-
-  console.log('alltitles', titles)
 
   return (
     <div className="page artwork">
@@ -22,7 +19,6 @@ export default async function Artwork() {
             return `artwork/album/${slugs[index]}`
           }}
           getTitleFromIndex={(index) => {
-            console.log('fetched title', index, titles[index])
             return titles[index]
           }}
         />

@@ -35,7 +35,7 @@
   top: 0;
   left: 0;
   transition: opacity 0.3s ease;
-  background-color: rgb(129, 9, 127, 0.5);
+  background-color: var(--primary-70);
   pointer-events: none;
 }
 

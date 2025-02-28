@@ -1,25 +1,15 @@
 'use client'
 import Image from 'next/image'
 import { useAlbum } from '@/app/(frontend)/artwork/album/[slug]/AlbumProvider'
-import { RiArrowLeftSLine } from 'react-icons/ri'
-import { RiArrowRightSLine } from 'react-icons/ri'
+import { RiArrowLeftSLine, RiArrowRightSLine } from 'react-icons/ri'
 import { IoCloseSharp } from 'react-icons/io5'
-
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
+import styles from './ImageViewer.module.css'
 
 export default function ImageViewer({}) {
-  // const { images, selectedIndex } = useAlbum()
-  // const [showIndex, setShowIndex] = useState(selectedIndex)
-  // const [oldIndex, setOldIndex] = useState(() => {
-  //   console.log('SET STATE')
-  //   return selectedIndex
-  // })
-  // const [switchImage, setSwitchImage] = useState(false)
-
   const [currentImageIndex, setCurrentImageIndex] = useState(null)
   const [showImage, setShowImage] = useState(false)
-
   const { selectedIndex, setSelectedIndex, album } = useAlbum()
 
   useEffect(() => {
@@ -29,10 +19,7 @@ export default function ImageViewer({}) {
       timer = setTimeout(() => {
         setShowImage(true)
       }, 340)
-
-      return () => {
-        clearTimeout(timer)
-      }
+      return () => clearTimeout(timer)
     }
     if (selectedIndex !== currentImageIndex) {
       setShowImage(false)
@@ -40,111 +27,51 @@ export default function ImageViewer({}) {
         setCurrentImageIndex(selectedIndex)
         setShowImage(true)
       }, 340)
-
-      return () => {
-        clearTimeout(timer)
-      }
-      // setCurrentImageIndex(selectedIndex)
+      return () => clearTimeout(timer)
     }
-
     setShowImage(true)
   }, [selectedIndex, album, currentImageIndex])
 
-  useEffect(() => {
-    //  console.log('IMAGE VIEWER album changed', album)
-  }, [album])
+  useEffect(() => {}, [album])
 
   const alt =
     currentImageIndex !== null
       ? album?.images[currentImageIndex].alt || 'Default image'
       : 'Default image'
   const src = currentImageIndex !== null ? album?.images[currentImageIndex].url || null : null
-
   const nextIndex = selectedIndex < album.images.length - 1 ? selectedIndex + 1 : 0
   const prevIndex = selectedIndex > 0 ? selectedIndex - 1 : album.images.length - 1
-
   const showViewer = selectedIndex != null
 
-  console.log('load viewer Image src', src)
+  const title =
+    currentImageIndex !== null ? album?.images[currentImageIndex].title || 'Untitled' : 'Untitled'
+
+  const subtitle =
+    currentImageIndex !== null ? album?.images[currentImageIndex].subtitle || null : null
+
+  console.log('image in focus', album?.images[currentImageIndex])
 
   return (
     <div
-      style={{
-        position: 'absolute',
-        top: 0,
-        left: 0,
-        width: '100%',
-        height: '100%',
-        color: '#dfdfdf',
-        transition: 'opacity 0.25s',
-        backgroundColor: 'rgba(0,0,0,0.88)',
-        pointerEvents: showViewer ? 'all' : 'none',
-        opacity: showViewer ? 1 : 0,
-      }}
+      className={`${styles.viewerContainer} ${showViewer ? styles.viewerVisible : styles.viewerHidden}`}
     >
-      <div
-        style={{
-          position: 'absolute',
-          left: '50%',
-          top: '50%',
-          transform: 'translate(-50%, -50%)',
-          width: 'calc(100% - 80px)',
-          height: 'calc(100% - 80px)',
-
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          flexDirection: 'column',
-        }}
-      >
-        <div
-          style={{
-            width: '100%',
-            height: 'calc(100% - 20px)',
-            position: 'relative',
-          }}
-        >
-          <div
-            style={{
-              position: 'relative',
-              height: '100%',
-
-              opacity: showImage ? 1 : 0,
-              transition: 'opacity 0.25s',
-            }}
-          >
+      <div className={styles.viewerContent}>
+        <div className={styles.imageWrapper}>
+          <div className={`${styles.imageContainer} ${showImage ? styles.visible : styles.hidden}`}>
             {src && <Image src={src} layout="fill" objectFit="contain" alt={alt} />}
           </div>
-          <div
-            style={{
-              position: 'absolute',
-              top: '50%',
-              transform: 'translate(0%, -50%)',
-              left: 0,
-
-              fontSize: '3.5rem',
-            }}
-          >
+          <div className={styles.prevButton}>
             <Link href={`/artwork/album/${album.slug}/image/${prevIndex}`}>
               <RiArrowLeftSLine />
             </Link>
           </div>
-          <div
-            style={{
-              position: 'absolute',
-              top: '50%',
-              transform: 'translate(0%, -50%)',
-              right: 0,
-
-              fontSize: '3.5rem',
-            }}
-          >
+          <div className={styles.nextButton}>
             <Link href={`/artwork/album/${album.slug}/image/${nextIndex}`}>
               <RiArrowRightSLine />
             </Link>
           </div>
         </div>
-        <div style={{ position: 'absolute', top: 0, right: 0, fontSize: '2.5rem' }}>
+        <div className={styles.closeButton}>
           <Link
             href={`/artwork/album/${album.slug}`}
             onClick={() => {
@@ -155,19 +82,9 @@ export default function ImageViewer({}) {
             <IoCloseSharp />
           </Link>
         </div>
-
-        <div
-          style={{
-            height: '50px',
-
-            fontSize: 14,
-            fontWeight: 400,
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}
-        >
-          <p style={{ margin: 0, padding: 0, lineHeight: 20 }}>{alt}</p>
+        <div className={styles.caption}>
+          <p className={styles.title}>{title}</p>
+          <p className={styles.subtitle}>{subtitle}</p>
         </div>
       </div>
     </div>

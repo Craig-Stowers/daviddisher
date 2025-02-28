@@ -1,5 +1,8 @@
 :root {
   --font-mono: 'Roboto Mono', monospace;
+  --primary: rgb(69, 145, 173);
+  --primary-50: rgba(69, 145, 173, 0.5);
+  --primary-70: rgba(69, 145, 173, 0.7);
 }
 
 * {
@@ -10,7 +13,7 @@ html {
   font-size: 18px;
   line-height: 32px;
 
-  background: rgb(255, 255, 255);
+  background: #fafafa;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -157,4 +160,9 @@ svg {
 
 .payl-admin__login__logo {
   display: none !important;
+}
+
+a:visited {
+  color: inherit;
+  text-decoration: none;
 }

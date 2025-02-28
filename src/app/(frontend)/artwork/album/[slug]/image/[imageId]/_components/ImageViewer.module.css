@@ -1,0 +1,109 @@
+.viewerContainer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  color: #dfdfdf;
+  transition: opacity 0.25s;
+  background-color: rgba(0, 0, 0, 0.88);
+  pointer-events: none;
+  opacity: 0;
+}
+
+.visible {
+  opacity: 1;
+}
+
+.hidden {
+  opacity: 0;
+}
+
+.viewerVisible {
+  pointer-events: all;
+  opacity: 1;
+}
+
+.viewerHidden {
+  pointer-events: none;
+  opacity: 0;
+}
+
+.viewerContent {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: calc(100% - 80px);
+  height: calc(100% - 80px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  color: white;
+}
+
+.imageWrapper {
+  width: 100%;
+  height: calc(100% - 20px);
+  position: relative;
+}
+
+.ViewerContent a svg {
+  color: white;
+}
+
+.imageContainer {
+  position: relative;
+  height: 100%;
+  transition: opacity 0.25s;
+}
+
+.prevButton,
+.nextButton {
+  position: absolute;
+  top: 50%;
+  transform: translate(0%, -50%);
+  font-size: 3.5rem;
+}
+
+.prevButton {
+  left: 0;
+}
+
+.nextButton {
+  right: 0;
+}
+
+.closeButton {
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-size: 2.5rem;
+}
+
+.caption {
+  padding-top: 16px;
+  height: 60px;
+
+  font-weight: 400;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.caption .title {
+  margin: 0;
+  padding: 0;
+  line-height: 20px;
+  margin-bottom: 9px;
+  font-size: 16px;
+}
+
+.caption .subtitle {
+  margin: 0;
+  padding: 0;
+  line-height: 20px;
+  font-size: 12px;
+}

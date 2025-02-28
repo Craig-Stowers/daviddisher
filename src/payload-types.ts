@@ -374,7 +374,7 @@ export interface SiteSetting {
     };
     [k: string]: unknown;
   } | null;
-  bioImage?: (string | null) | InterfaceMedia;
+  portrait?: (string | null) | Artwork;
   email?: string | null;
   phone?: string | null;
   links?:
@@ -394,7 +394,7 @@ export interface SiteSetting {
 export interface SiteSettingsSelect<T extends boolean = true> {
   frontPageArt?: T;
   bio?: T;
-  bioImage?: T;
+  portrait?: T;
   email?: T;
   phone?: T;
   links?:
