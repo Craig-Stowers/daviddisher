@@ -11,6 +11,7 @@ import { vercelBlobStorage } from '@payloadcms/storage-vercel-blob'
 import { Users } from './collections/Users'
 import { Media } from './collections/Media'
 import { Albums } from './collections/Albums'
+import InterfaceMedia from './collections/InterfaceMedia'
 //import { MediaWithPrefix } from './collections/MediaWithPrefix'
 
 const filename = fileURLToPath(import.meta.url)
@@ -23,7 +24,7 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
-  collections: [Users, Media, Albums],
+  collections: [Users, Media, InterfaceMedia, Albums],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {
@@ -42,6 +43,7 @@ export default buildConfig({
             enabled: true, // Optional, defaults to true
             collections: {
               media: true,
+              ['interface-media']: true,
             },
             token: process.env.BLOB_READ_WRITE_TOKEN,
           }),
