@@ -160,3 +160,7 @@ svg {
   line-height: 32px;
   font-weight: 500;
 }
+
+.payl-admin__login__logo {
+  display: none !important;
+}
