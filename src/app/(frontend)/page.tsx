@@ -45,6 +45,8 @@ export default async function HomePage() {
           const height = item.height ?? 100 // Default height if missing
           const alt = item.alt || 'Default image'
 
+          console.log('load Home Image src', src)
+
           return (
             src && (
               <Image

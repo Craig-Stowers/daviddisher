@@ -30,7 +30,7 @@ export default function Gallery({ gallerySlug }: { gallerySlug: string }) {
             return <p key={item}>Loading image...</p>
           }
 
-          const src = item.url || '/fallback.jpg'
+          const src = item.url || null
           const alt = item.alt || 'Default image'
 
           return (
@@ -43,16 +43,18 @@ export default function Gallery({ gallerySlug }: { gallerySlug: string }) {
                     thumbRefs.current[i] = el
                   }} // Store the Link ref
                 >
-                  <Image
-                    src={src}
-                    layout="fill"
-                    objectFit="cover"
-                    alt={alt}
-                    placeholder="blur"
-                    blurDataURL="data:image/png;base64,..." // Optional placeholder
-                    quality={50}
-                    sizes="(max-width: 640px) 50vw, (max-width: 1024px) 25vw, 20vw"
-                  />
+                  {src && (
+                    <Image
+                      src={src}
+                      layout="fill"
+                      objectFit="cover"
+                      alt={alt}
+                      placeholder="blur"
+                      blurDataURL="data:image/png;base64,..." // Optional placeholder
+                      quality={50}
+                      sizes="(max-width: 640px) 50vw, (max-width: 1024px) 25vw, 20vw"
+                    />
+                  )}
                 </Link>
               </div>
               <div className={styles.cardText}>

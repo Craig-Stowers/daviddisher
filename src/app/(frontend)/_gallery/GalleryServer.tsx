@@ -21,6 +21,8 @@ export default function GalleryServer({ images, getUrlFromIndex }) {
           // const height = item.height ?? 100 // Default height if missing
           const alt = item.alt || 'Default image'
 
+          console.log('load Gallery Image src', src)
+
           return (
             <div className={styles.cardContainer} key={item.id}>
               <div className={styles.card}>

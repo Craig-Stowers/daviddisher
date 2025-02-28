@@ -58,15 +58,14 @@ export default function ImageViewer({}) {
     currentImageIndex !== null
       ? album?.images[currentImageIndex].alt || 'Default image'
       : 'Default image'
-  const src =
-    currentImageIndex !== null
-      ? album?.images[currentImageIndex].url || '/fallback.jpg'
-      : '/fallback.jpg'
+  const src = currentImageIndex !== null ? album?.images[currentImageIndex].url || null : null
 
   const nextIndex = selectedIndex < album.images.length - 1 ? selectedIndex + 1 : 0
   const prevIndex = selectedIndex > 0 ? selectedIndex - 1 : album.images.length - 1
 
   const showViewer = selectedIndex != null
+
+  console.log('load viewer Image src', src)
 
   return (
     <div
@@ -114,7 +113,7 @@ export default function ImageViewer({}) {
               transition: 'opacity 0.25s',
             }}
           >
-            <Image src={src} layout="fill" objectFit="contain" alt={alt} />
+            {src && <Image src={src} layout="fill" objectFit="contain" alt={alt} />}
           </div>
           <div
             style={{
