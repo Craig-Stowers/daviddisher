@@ -24,6 +24,6 @@ export async function generateStaticParams() {
   }))
 }
 
-export default async function AlbumPage({ params: paramsPromise }: Args) {
+export default async function AlbumPage() {
   return null
 }
