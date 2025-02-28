@@ -26,8 +26,7 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
     <html>
       <body>
         <Nav />
-
-        {props.children}
+        <div className="site-container">{props.children}</div>
 
         <div id="modal-root" />
       </body>

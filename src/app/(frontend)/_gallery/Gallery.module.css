@@ -14,15 +14,33 @@
   height: 170px;
   overflow: hidden;
   border-radius: 0px;
+  cursor: pointer;
 }
 
 .cardContainer:hover .card {
-  filter: invert(100%) brightness(0.3);
+  filter: invert(100%);
   transform: scale(1.3);
 }
 
+.cardContainer:hover .cardHoverContainer {
+  opacity: 1;
+}
+
+.cardHoverContainer {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+
+  top: 0;
+  left: 0;
+  transition: opacity 0.3s ease;
+  background-color: rgb(129, 9, 127, 0.5);
+  pointer-events: none;
+}
+
 .card {
-  transition: all 0.8s ease-out;
+  transition: all 0.5s ease-out;
   cursor: pointer;
 
   width: 100%;
@@ -36,18 +54,17 @@
 } */
 
 .cardContainer:hover .cardText {
-  opacity: 1;
   top: 50%;
 }
 
 .cardText {
   padding: 10px;
   text-align: center;
-
   position: absolute;
 
-  opacity: 0;
-  font-size: 13px;
+  width: 100%;
+
+  font-size: 15px;
   line-height: 30px;
   transition: all 0.33s ease;
   top: 55%;
@@ -55,4 +72,5 @@
   transform: translate(-50%, -50%);
   pointer-events: none;
   font-weight: 600;
+  color: white;
 }

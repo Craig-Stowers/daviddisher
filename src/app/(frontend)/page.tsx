@@ -1,29 +1,15 @@
 import Image from 'next/image'
-import { getPayload } from 'payload'
+
 import React from 'react'
-import { fileURLToPath } from 'url'
 
-import config from '@/payload.config'
 import './styles.css'
-import configPromise from '@payload-config'
 
-import type { StaticImageData } from 'next/image'
+import { getGlobals } from '@/lib/getData'
+
+//import type { StaticImageData } from 'next/image'
 
 export default async function HomePage() {
-  //const headers = await getHeaders()
-  const payloadConfig = await config
-  //const payload = await getPayload({ config: payloadConfig })
-  const payload = await getPayload({ config: configPromise })
-
-  // const { user } = await payload.auth({ headers })
-
-  // Fetch media
-  const media = await payload.find({
-    collection: 'media',
-    depth: 1,
-    limit: 0,
-    overrideAccess: false,
-  })
+  const siteSettings = await getGlobals('site-settings')
 
   // Define type for media items
   interface MediaItem {
@@ -34,10 +20,20 @@ export default async function HomePage() {
     alt?: string | null
   }
 
+  const frontPageArt = siteSettings.frontPageArt
+
   return (
     <div className="home">
       <div className="content">
-        {media.docs.map((item: MediaItem) => {
+        <Image
+          src={frontPageArt.url}
+          width={frontPageArt.width}
+          height={frontPageArt.height}
+          alt={frontPageArt.alt}
+          quality={100}
+          loading="lazy"
+        />
+        {/* {media.docs.map((item: MediaItem) => {
           // Ensure src is always a valid string
           // const src: StaticImageData | string = item.url || '/fallback.jpg'
           const src: StaticImageData | string = item.url || null
@@ -62,7 +58,7 @@ export default async function HomePage() {
               />
             )
           )
-        })}
+        })} */}
       </div>
     </div>
   )

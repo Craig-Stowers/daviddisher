@@ -20,13 +20,13 @@ export const Albums: CollectionConfig = {
     {
       name: 'coverImage',
       type: 'relationship',
-      relationTo: 'media',
+      relationTo: 'artwork',
       required: false, // Optional cover image
     },
     {
       name: 'images',
       type: 'relationship',
-      relationTo: 'media',
+      relationTo: 'artwork',
       hasMany: true, // Multiple images per album
     },
   ],

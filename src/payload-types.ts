@@ -67,7 +67,7 @@ export interface Config {
   blocks: {};
   collections: {
     users: User;
-    media: Media;
+    artwork: Artwork;
     'interface-media': InterfaceMedia;
     albums: Album;
     'payload-locked-documents': PayloadLockedDocument;
@@ -77,7 +77,7 @@ export interface Config {
   collectionsJoins: {};
   collectionsSelect: {
     users: UsersSelect<false> | UsersSelect<true>;
-    media: MediaSelect<false> | MediaSelect<true>;
+    artwork: ArtworkSelect<false> | ArtworkSelect<true>;
     'interface-media': InterfaceMediaSelect<false> | InterfaceMediaSelect<true>;
     albums: AlbumsSelect<false> | AlbumsSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
@@ -87,8 +87,12 @@ export interface Config {
   db: {
     defaultIDType: string;
   };
-  globals: {};
-  globalsSelect: {};
+  globals: {
+    'site-settings': SiteSetting;
+  };
+  globalsSelect: {
+    'site-settings': SiteSettingsSelect<false> | SiteSettingsSelect<true>;
+  };
   locale: null;
   user: User & {
     collection: 'users';
@@ -135,11 +139,13 @@ export interface User {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "media".
+ * via the `definition` "artwork".
  */
-export interface Media {
+export interface Artwork {
   id: string;
   alt: string;
+  title: string;
+  subtitle?: string | null;
   updatedAt: string;
   createdAt: string;
   url?: string | null;
@@ -179,8 +185,8 @@ export interface Album {
   id: string;
   name: string;
   slug: string;
-  coverImage?: (string | null) | Media;
-  images?: (string | Media)[] | null;
+  coverImage?: (string | null) | Artwork;
+  images?: (string | Artwork)[] | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -196,8 +202,8 @@ export interface PayloadLockedDocument {
         value: string | User;
       } | null)
     | ({
-        relationTo: 'media';
-        value: string | Media;
+        relationTo: 'artwork';
+        value: string | Artwork;
       } | null)
     | ({
         relationTo: 'interface-media';
@@ -266,10 +272,12 @@ export interface UsersSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "media_select".
+ * via the `definition` "artwork_select".
  */
-export interface MediaSelect<T extends boolean = true> {
+export interface ArtworkSelect<T extends boolean = true> {
   alt?: T;
+  title?: T;
+  subtitle?: T;
   updatedAt?: T;
   createdAt?: T;
   url?: T;
@@ -343,6 +351,62 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
   batch?: T;
   updatedAt?: T;
   createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "site-settings".
+ */
+export interface SiteSetting {
+  id: string;
+  frontPageArt?: (string | null) | Artwork;
+  bio?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  bioImage?: (string | null) | InterfaceMedia;
+  email?: string | null;
+  phone?: string | null;
+  links?:
+    | {
+        url: string;
+        icon?: (string | null) | InterfaceMedia;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "site-settings_select".
+ */
+export interface SiteSettingsSelect<T extends boolean = true> {
+  frontPageArt?: T;
+  bio?: T;
+  bioImage?: T;
+  email?: T;
+  phone?: T;
+  links?:
+    | T
+    | {
+        url?: T;
+        icon?: T;
+        id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

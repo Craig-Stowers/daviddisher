@@ -9,9 +9,11 @@ import sharp from 'sharp'
 import { vercelBlobStorage } from '@payloadcms/storage-vercel-blob'
 
 import { Users } from './collections/Users'
-import { Media } from './collections/Media'
+import { Artwork } from './collections/Artwork'
 import { Albums } from './collections/Albums'
 import InterfaceMedia from './collections/InterfaceMedia'
+import SiteSettings from './globals/SiteSettings'
+
 //import { MediaWithPrefix } from './collections/MediaWithPrefix'
 
 const filename = fileURLToPath(import.meta.url)
@@ -24,7 +26,8 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
-  collections: [Users, Media, InterfaceMedia, Albums],
+  collections: [Users, Artwork, InterfaceMedia, Albums],
+  globals: [SiteSettings],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {
@@ -42,7 +45,7 @@ export default buildConfig({
           vercelBlobStorage({
             enabled: true, // Optional, defaults to true
             collections: {
-              media: true,
+              artwork: true,
               ['interface-media']: true,
             },
             token: process.env.BLOB_READ_WRITE_TOKEN,

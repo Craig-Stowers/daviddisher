@@ -33,3 +33,13 @@ export const getAllAlbums = cache(async () => {
 
   return result.docs
 })
+
+export const getGlobals = cache(async (slug) => {
+  const payload = await getPayload({ config: configPromise })
+
+  const result = await payload.findGlobal({
+    slug,
+  })
+
+  return result
+})

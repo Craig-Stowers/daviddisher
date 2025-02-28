@@ -5,7 +5,7 @@ import styles from './Gallery.module.css'
 // Define type for image items
 import type { StaticImageData } from 'next/image'
 
-export default function GalleryServer({ images, getUrlFromIndex }) {
+export default function GalleryServer({ images, getUrlFromIndex, getTitleFromIndex }) {
   return (
     <div>
       <div className={styles.gallery} style={{ display: 'flex', flexWrap: 'wrap' }}>
@@ -45,8 +45,8 @@ export default function GalleryServer({ images, getUrlFromIndex }) {
                   />
                 </Link>
               </div>
-              <div className={styles.cardText}>
-                <p>{alt}</p>
+              <div className={styles.cardHoverContainer}>
+                <div className={styles.cardText}>{getTitleFromIndex(i)}</div>
               </div>
             </div>
           )

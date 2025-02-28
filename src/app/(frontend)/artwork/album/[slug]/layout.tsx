@@ -1,42 +1,25 @@
-//import React, { cache } from 'react'
-import configPromise from '@payload-config'
-import { getPayload } from 'payload'
 import { AlbumProvider } from './AlbumProvider'
 import ImageViewer from './image/[imageId]/_components/ImageViewer'
-
-import { getAlbumData } from '@/lib/fetchAlbum'
-
+import { getAlbumData } from '@/lib/getData'
 import GalleryServer from '../../../_gallery/GalleryServer'
-
-// const queryAlbumBySlug = cache(async ({ slug }: { slug: string }) => {
-//   const payload = await getPayload({ config: configPromise })
-
-//   const result = await payload.find({
-//     collection: 'albums',
-//     where: {
-//       slug: {
-//         equals: slug,
-//       },
-//     },
-//     depth: 2, // Ensures full media objects are returned instead of just IDs
-//   })
-
-//   return result.docs?.[0] || null
-// })
 
 export default async function AlbumLayout(props) {
   const newParams = await props.params
 
-  //const album = (await queryAlbumBySlug({ slug: newParams.slug })) || null
-
   const album = (await getAlbumData({ slug: newParams.slug })) || null
 
+  console.log('album', album)
+
   return (
-    <div className="relative">
+    <div className="page">
       <GalleryServer
         images={album.images}
         getUrlFromIndex={(index) => {
           return `/artwork/album/${newParams.slug}/image/${index}`
+        }}
+        getTitleFromIndex={(index) => {
+          const title = typeof album?.images[index] === 'object' ? album.images[index].title : ''
+          return title
         }}
       />
 
@@ -50,8 +33,6 @@ export default async function AlbumLayout(props) {
           pointerEvents: 'none',
         }}
       >
-        {/* {props.children} */}
-
         <AlbumProvider albumData={album}>
           {props.children}
           <ImageViewer />
