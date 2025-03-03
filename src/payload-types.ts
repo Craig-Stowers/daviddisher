@@ -70,6 +70,7 @@ export interface Config {
     artwork: Artwork;
     'interface-media': InterfaceMedia;
     albums: Album;
+    timeline: Timeline;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
@@ -80,6 +81,7 @@ export interface Config {
     artwork: ArtworkSelect<false> | ArtworkSelect<true>;
     'interface-media': InterfaceMediaSelect<false> | InterfaceMediaSelect<true>;
     albums: AlbumsSelect<false> | AlbumsSelect<true>;
+    timeline: TimelineSelect<false> | TimelineSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
     'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
@@ -192,6 +194,36 @@ export interface Album {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "timeline".
+ */
+export interface Timeline {
+  id: string;
+  title: string;
+  entries?:
+    | {
+        text: {
+          root: {
+            type: string;
+            children: {
+              type: string;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        };
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-locked-documents".
  */
 export interface PayloadLockedDocument {
@@ -212,6 +244,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'albums';
         value: string | Album;
+      } | null)
+    | ({
+        relationTo: 'timeline';
+        value: string | Timeline;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -317,6 +353,21 @@ export interface AlbumsSelect<T extends boolean = true> {
   slug?: T;
   coverImage?: T;
   images?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "timeline_select".
+ */
+export interface TimelineSelect<T extends boolean = true> {
+  title?: T;
+  entries?:
+    | T
+    | {
+        text?: T;
+        id?: T;
+      };
   updatedAt?: T;
   createdAt?: T;
 }

@@ -3,6 +3,7 @@
   --primary: rgb(69, 145, 173);
   --primary-50: rgba(69, 145, 173, 0.5);
   --primary-70: rgba(69, 145, 173, 0.7);
+  --primary-dark-70: rgba(34, 90, 111, 0.7);
 }
 
 * {

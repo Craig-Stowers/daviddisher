@@ -5,6 +5,8 @@ import Image from 'next/image'
 export default async function Logo() {
   const siteSettings = await getGlobals('site-settings')
   console.log('siteSettings', siteSettings)
+
+  const potraitSrc = siteSettings?.portrait?.url || null
   return (
     <div
       style={{
@@ -26,13 +28,15 @@ export default async function Logo() {
           transform: 'translateX(-54px)',
         }}
       >
-        <Image
-          src={siteSettings.bioImage.url}
-          objectFit="cover"
-          alt="douch"
-          layout={'fill'}
-          objectPosition={'50% 33%'}
-        />
+        {potraitSrc && (
+          <Image
+            src={siteSettings.portrait.url}
+            objectFit="cover"
+            alt="douch"
+            layout={'fill'}
+            objectPosition={'50% 27%'}
+          />
+        )}
       </div>
     </div>
   )

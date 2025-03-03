@@ -35,7 +35,7 @@
   top: 0;
   left: 0;
   transition: opacity 0.3s ease;
-  background-color: var(--primary-70);
+  background-color: var(--primary-dark-70);
   pointer-events: none;
 }
 

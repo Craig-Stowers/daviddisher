@@ -13,6 +13,7 @@ import { Artwork } from './collections/Artwork'
 import { Albums } from './collections/Albums'
 import InterfaceMedia from './collections/InterfaceMedia'
 import SiteSettings from './globals/SiteSettings'
+import Timeline from './collections/Timeline'
 
 //import { MediaWithPrefix } from './collections/MediaWithPrefix'
 
@@ -31,7 +32,7 @@ export default buildConfig({
       },
     },
   },
-  collections: [Users, Artwork, InterfaceMedia, Albums],
+  collections: [Users, Artwork, InterfaceMedia, Albums, Timeline],
   globals: [SiteSettings],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',

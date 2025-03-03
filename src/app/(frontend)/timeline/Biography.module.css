@@ -1,0 +1,46 @@
+.Biography {
+  display: flex;
+  margin-top: 60px;
+}
+
+.content {
+  width: 100%;
+  max-width: 1000px;
+
+  display: flex;
+}
+
+.portraitContainer {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 80px;
+}
+.portrait {
+  flex-shrink: 0;
+  position: relative;
+}
+
+.bio {
+  padding: 0px 40px;
+}
+
+.portraitInfo {
+  text-align: right;
+  padding-top: 5px;
+  padding-right: 3px;
+}
+
+.portraitInfo p {
+  margin: 0;
+  line-height: 25px;
+}
+
+.portraitInfo .title {
+  font-size: 16px;
+}
+.portraitInfo .subtitle {
+  font-size: 12px;
+}
+.bio p:first-of-type {
+  margin-top: 0px;
+}
