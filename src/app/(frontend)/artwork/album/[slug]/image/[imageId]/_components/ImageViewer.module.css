@@ -57,6 +57,10 @@
   color: white !important;
 }
 
+.ViewerContent a:visisted {
+  color: white !important;
+}
+
 .imageContainer {
   position: relative;
   height: 100%;
