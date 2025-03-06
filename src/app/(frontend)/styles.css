@@ -163,8 +163,9 @@ svg {
   display: none !important;
 }
 
-
-
-a, a:link, a:visited {
+a,
+a:link,
+a:visited {
   color: inherit; /* Or specify a custom color */
   text-decoration: none; /* Optional */
+}
