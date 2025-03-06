@@ -34,6 +34,11 @@ export const Artwork: CollectionConfig = {
       name: 'subtitle',
       type: 'text',
       required: false,
+      admin: {
+        components: {
+          Field: './collections/components/AutoFillSubTitle',
+        },
+      },
     },
   ],
   upload: true,

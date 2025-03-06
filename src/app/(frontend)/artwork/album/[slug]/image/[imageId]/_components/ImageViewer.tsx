@@ -49,7 +49,7 @@ export default function ImageViewer({}) {
   const subtitle =
     currentImageIndex !== null ? album?.images[currentImageIndex].subtitle || null : null
 
-  console.log('image in focus', album?.images[currentImageIndex])
+  // console.log('image in focus', album?.images[currentImageIndex])
 
   return (
     <div
