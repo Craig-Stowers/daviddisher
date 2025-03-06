@@ -71,6 +71,14 @@
   font-size: 3.5rem;
 }
 
+.ViewerContent .prevButton a {
+  color: white !important;
+}
+
+.ViewerContent .nextButton a {
+  color: white !important;
+}
+
 .prevButton {
   left: 0;
 }
