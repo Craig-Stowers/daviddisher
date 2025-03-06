@@ -44,7 +44,7 @@
 }
 
 .imageWrapper {
-  width: 100%;
+  width: calc(100% - 0px);
   height: calc(100% - 20px);
   position: relative;
 }
@@ -63,7 +63,10 @@
 
 .imageContainer {
   position: relative;
+  margin-left: auto;
+  margin-right: auto;
   height: 100%;
+  width: calc(100% - 160px);
   transition: opacity 0.25s;
 }
 
