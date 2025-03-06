@@ -30,6 +30,7 @@ export const Albums: CollectionConfig = {
       hasMany: true, // Multiple images per album
     },
   ],
+
   hooks: {
     beforeChange: [
       ({ data }) => {

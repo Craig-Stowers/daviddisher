@@ -14,11 +14,21 @@ export const Artwork: CollectionConfig = {
       name: 'alt',
       type: 'text',
       required: true,
+      admin: {
+        components: {
+          Field: './collections/components/AutoFillAltTitle',
+        },
+      },
     },
     {
       name: 'title',
       type: 'text',
       required: true,
+      admin: {
+        components: {
+          Field: './collections/components/AutoFillAltTitle',
+        },
+      },
     },
     {
       name: 'subtitle',
@@ -28,3 +38,42 @@ export const Artwork: CollectionConfig = {
   ],
   upload: true,
 }
+
+// import { CollectionConfig } from 'payload'
+
+// const Artwork: CollectionConfig = {
+//   slug: 'artwork',
+//   labels: {
+//     singular: 'Artwork',
+//     plural: 'Artwork',
+//   },
+//   access: {
+//     read: () => true,
+//   },
+
+//   fields: [
+//     {
+//       name: 'alt',
+//       type: 'text',
+//       required: true,
+//       admin: {
+//         components: {
+//           Field: './components/AutoFillAltTitle',
+//         },
+//       },
+//     },
+//     {
+//       name: 'title',
+//       type: 'text',
+//       required: true,
+//     },
+//     {
+//       name: 'subtitle',
+//       type: 'text',
+//       required: false,
+//     },
+//   ],
+//   upload: true,
+// }
+
+// export default Artwork
