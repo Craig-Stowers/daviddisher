@@ -1,5 +1,4 @@
 import type { CollectionConfig } from 'payload'
-import { getFormattedTitles } from '@/lib/getFormattedTitles'
 
 function formatSubtitle(subtitle) {
   if (!subtitle) return null
@@ -76,8 +75,6 @@ function parseFilename(filename) {
   }
 }
 
-// Example usage
-
 export const Artwork: CollectionConfig = {
   slug: 'artwork',
   labels: {
@@ -92,31 +89,31 @@ export const Artwork: CollectionConfig = {
       name: 'alt',
       type: 'text',
       required: false,
-      admin: {
-        components: {
-          Field: './collections/components/AutoFillAltTitle',
-        },
-      },
+      // admin: {
+      //   components: {
+      //     Field: './collections/components/AutoFillAltTitle',
+      //   },
+      // },
     },
     {
       name: 'title',
       type: 'text',
       required: false,
-      admin: {
-        components: {
-          Field: './collections/components/AutoFillAltTitle',
-        },
-      },
+      // admin: {
+      //   components: {
+      //     Field: './collections/components/AutoFillAltTitle',
+      //   },
+      // },
     },
     {
       name: 'subtitle',
       type: 'text',
       required: false,
-      admin: {
-        components: {
-          Field: './collections/components/AutoFillSubTitle',
-        },
-      },
+      // admin: {
+      //   components: {
+      //     Field: './collections/components/AutoFillSubTitle',
+      //   },
+      // },
     },
     {
       name: 'releaseDate',
@@ -127,16 +124,6 @@ export const Artwork: CollectionConfig = {
           displayFormat: 'dd/MM/yyyy', // 👈 Displays the date as DD/MM/YYYY
         },
       },
-      // hooks: {
-      //   beforeChange: [
-      //     ({ data }) => {
-      //       if (data.releaseDate) {
-      //         const date = new Date(data.releaseDate)
-      //         data.releaseDate = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-01T00:00:00.000Z` // 👈 Forces Day = 01
-      //       }
-      //     },
-      //   ],
-      // },
     },
   ],
   hooks: {
@@ -169,42 +156,3 @@ export const Artwork: CollectionConfig = {
   },
   upload: true,
 }
-
-// import { CollectionConfig } from 'payload'
-
-// const Artwork: CollectionConfig = {
-//   slug: 'artwork',
-//   labels: {
-//     singular: 'Artwork',
-//     plural: 'Artwork',
-//   },
-//   access: {
-//     read: () => true,
-//   },
-
-//   fields: [
-//     {
-//       name: 'alt',
-//       type: 'text',
-//       required: true,
-//       admin: {
-//         components: {
-//           Field: './components/AutoFillAltTitle',
-//         },
-//       },
-//     },
-//     {
-//       name: 'title',
-//       type: 'text',
-//       required: true,
-//     },
-//     {
-//       name: 'subtitle',
-//       type: 'text',
-//       required: false,
-//     },
-//   ],
-//   upload: true,
-// }
-
-// export default Artwork

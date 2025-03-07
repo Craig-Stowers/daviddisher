@@ -1,5 +1,4 @@
-import { default as default_dee65e8a773cfb7ec27c8e2bf51519e2 } from 'src/collections/components/AutoFillAltTitle'
-import { default as default_f2d34109de90af8461ca4a1e068d2e74 } from 'src/collections/components/AutoFillSubTitle'
+import { default as default_6567451ea9082f5d0d9d6d34f80b9ae4 } from 'src/collections/components/CreateAlbumByYearButton'
 import { RscEntryLexicalCell as RscEntryLexicalCell_44fe37237e0ebf4470c9990d8cb7b07e } from '@payloadcms/richtext-lexical/rsc'
 import { RscEntryLexicalField as RscEntryLexicalField_44fe37237e0ebf4470c9990d8cb7b07e } from '@payloadcms/richtext-lexical/rsc'
 import { InlineToolbarFeatureClient as InlineToolbarFeatureClient_e70f5e05f09f93e00b997edb1ef0c864 } from '@payloadcms/richtext-lexical/client'
@@ -25,8 +24,7 @@ import { ItalicFeatureClient as ItalicFeatureClient_e70f5e05f09f93e00b997edb1ef0
 import { default as default_024f8ed8636909f52232d90d9ee6504c } from 'src/payload-extra/Logo.tsx'
 
 export const importMap = {
-  "./collections/components/AutoFillAltTitle#default": default_dee65e8a773cfb7ec27c8e2bf51519e2,
-  "./collections/components/AutoFillSubTitle#default": default_f2d34109de90af8461ca4a1e068d2e74,
+  "./collections/components/CreateAlbumByYearButton#default": default_6567451ea9082f5d0d9d6d34f80b9ae4,
   "@payloadcms/richtext-lexical/rsc#RscEntryLexicalCell": RscEntryLexicalCell_44fe37237e0ebf4470c9990d8cb7b07e,
   "@payloadcms/richtext-lexical/rsc#RscEntryLexicalField": RscEntryLexicalField_44fe37237e0ebf4470c9990d8cb7b07e,
   "@payloadcms/richtext-lexical/client#InlineToolbarFeatureClient": InlineToolbarFeatureClient_e70f5e05f09f93e00b997edb1ef0c864,

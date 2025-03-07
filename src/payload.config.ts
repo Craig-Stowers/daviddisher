@@ -14,6 +14,7 @@ import { Albums } from './collections/Albums'
 import InterfaceMedia from './collections/InterfaceMedia'
 import SiteSettings from './globals/SiteSettings'
 import Timeline from './collections/Timeline'
+import generateAlbumsByYear from './lib/generateAlbumsByYear'
 
 //import { MediaWithPrefix } from './collections/MediaWithPrefix'
 
@@ -59,4 +60,7 @@ export default buildConfig({
         ]
       : []), // If condition fails, spread an empty array
   ],
+  // onInit: async () => {
+  //   await generateAlbumsByYear()
+  // },
 })
