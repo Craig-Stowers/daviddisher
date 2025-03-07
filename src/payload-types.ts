@@ -145,9 +145,10 @@ export interface User {
  */
 export interface Artwork {
   id: string;
-  alt: string;
-  title: string;
+  alt?: string | null;
+  title?: string | null;
   subtitle?: string | null;
+  releaseDate?: string | null;
   updatedAt: string;
   createdAt: string;
   url?: string | null;
@@ -187,6 +188,7 @@ export interface Album {
   id: string;
   name: string;
   slug: string;
+  order: number;
   coverImage?: (string | null) | Artwork;
   images?: (string | Artwork)[] | null;
   updatedAt: string;
@@ -314,6 +316,7 @@ export interface ArtworkSelect<T extends boolean = true> {
   alt?: T;
   title?: T;
   subtitle?: T;
+  releaseDate?: T;
   updatedAt?: T;
   createdAt?: T;
   url?: T;
@@ -351,6 +354,7 @@ export interface InterfaceMediaSelect<T extends boolean = true> {
 export interface AlbumsSelect<T extends boolean = true> {
   name?: T;
   slug?: T;
+  order?: T;
   coverImage?: T;
   images?: T;
   updatedAt?: T;

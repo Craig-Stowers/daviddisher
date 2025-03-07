@@ -2,17 +2,31 @@ import { CollectionConfig } from 'payload'
 
 export const Albums: CollectionConfig = {
   slug: 'albums',
+  // admin: {
+  //   defaultColumns: ['name'],
+  // },
+
   fields: [
     {
       name: 'name',
       type: 'text',
       required: true,
+      index: true, // Adds an index to the field
     },
     {
       name: 'slug',
       type: 'text',
       required: true,
       unique: true, // Ensures unique URLs
+      admin: {
+        position: 'sidebar',
+      },
+    },
+    {
+      name: 'order',
+      type: 'number',
+      required: true,
+      defaultValue: 0, // Default value of 0
       admin: {
         position: 'sidebar',
       },
