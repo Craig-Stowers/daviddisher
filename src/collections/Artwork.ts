@@ -126,33 +126,33 @@ export const Artwork: CollectionConfig = {
       },
     },
   ],
-  hooks: {
-    beforeChange: [
-      ({ data }) => {
-        if (data && data.filename) {
-          // const titles = getFormattedTitles(data.filename)
+  // hooks: {
+  //   beforeChange: [
+  //     ({ data }) => {
+  //       if (data && data.filename) {
+  //         // const titles = getFormattedTitles(data.filename)
 
-          const { title, subtitle, date } = parseFilename(data.filename)
+  //         const { title, subtitle, date } = parseFilename(data.filename)
 
-          const capitalizedTitle = toTitleCase(title)
-          const fixedSubtitle = formatSubtitle(subtitle)
-          const isoDate = date ? new Date(date).toISOString() : null
+  //         const capitalizedTitle = toTitleCase(title)
+  //         const fixedSubtitle = formatSubtitle(subtitle)
+  //         const isoDate = date ? new Date(date).toISOString() : null
 
-          console.log('testFields', date, capitalizedTitle, fixedSubtitle)
+  //         console.log('testFields', date, capitalizedTitle, fixedSubtitle)
 
-          return {
-            ...data,
+  //         return {
+  //           ...data,
 
-            title: capitalizedTitle,
-            alt: capitalizedTitle,
-            subtitle: fixedSubtitle,
-            releaseDate: isoDate,
-          }
-        }
+  //           title: capitalizedTitle,
+  //           alt: capitalizedTitle,
+  //           subtitle: fixedSubtitle,
+  //           releaseDate: isoDate,
+  //         }
+  //       }
 
-        return data
-      },
-    ],
-  },
+  //       return data
+  //     },
+  //   ],
+  // },
   upload: true,
 }
