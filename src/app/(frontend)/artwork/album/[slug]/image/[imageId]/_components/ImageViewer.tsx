@@ -9,55 +9,23 @@ import Link from 'next/link'
 import styles from './ImageViewer.module.css'
 import { AiOutlineLoading3Quarters } from 'react-icons/ai'
 
+const dummySources = [
+  'source1',
+  'source2',
+  'source3',
+  'source4',
+  'source5',
+  'source6',
+  'source7',
+  'source8',
+  'source9',
+]
+
 export default function ImageViewer({}) {
-  const [currentImageIndex, setCurrentImageIndex] = useState(null)
-  const [showImage, setShowImage] = useState(false)
   const { selectedIndex, setSelectedIndex, album } = useAlbum()
-  const [phase, setPhase] = useState('enter')
-  const [nextImageReady, setNextImageReady] = useState(false)
-  const router = useRouter()
+
   const [showLoader, setShowLoader] = useState(true)
 
-  useEffect(() => {
-    let timer
-
-    if (currentImageIndex == null && selectedIndex != null) {
-      setCurrentImageIndex(selectedIndex)
-      timer = setTimeout(() => {
-        setShowImage(true)
-      }, 300)
-      return () => clearTimeout(timer)
-    }
-    if (selectedIndex !== currentImageIndex) {
-      setNextImageReady(false)
-      setShowImage(false)
-      setPhase('exit')
-      timer = setTimeout(() => {
-        setPhase('enter')
-        setCurrentImageIndex(selectedIndex)
-        if (nextImageReady) {
-          setShowImage(true)
-          //setShowLoader(false)
-        }
-      }, 250)
-
-      return () => {
-        clearTimeout(timer)
-      }
-    }
-    //setShowImage(true)
-  }, [selectedIndex, album, currentImageIndex, nextImageReady])
-
-  useEffect(() => {
-    setShowLoader(false)
-  }, [selectedIndex])
-
-  useEffect(() => {
-    const loaderTimer = setTimeout(() => {
-      setShowLoader(true)
-    }, 350)
-    return () => clearTimeout(loaderTimer)
-  }, [currentImageIndex])
   // useEffect(() => {
   //   const nextIndex = selectedIndex < album.images.length - 1 ? selectedIndex + 1 : 0
   //   const prevIndex = selectedIndex > 0 ? selectedIndex - 1 : album.images.length - 1
@@ -75,55 +43,61 @@ export default function ImageViewer({}) {
   // img2.src = prevSrc
   // }, [album.images.length, selectedIndex, album.slug])
 
-  const alt =
-    currentImageIndex !== null
-      ? album?.images[currentImageIndex].alt || 'Default image'
-      : 'Default image'
-  const src = currentImageIndex !== null ? album?.images[currentImageIndex].url || null : null
   const nextIndex = selectedIndex < album.images.length - 1 ? selectedIndex + 1 : 0
   const prevIndex = selectedIndex > 0 ? selectedIndex - 1 : album.images.length - 1
-  const showViewer = selectedIndex != null
 
   const title =
-    currentImageIndex !== null ? album?.images[selectedIndex]?.title || 'Untitled' : 'Untitled'
+    selectedIndex !== null ? album?.images[selectedIndex]?.title || 'Untitled' : 'Untitled'
 
-  const subtitle =
-    currentImageIndex !== null ? album?.images[selectedIndex]?.subtitle || null : null
+  const subtitle = selectedIndex !== null ? album?.images[selectedIndex]?.subtitle || null : null
 
   // console.log('image in focus', album?.images[currentImageIndex])
 
   return (
     <div
-      className={`${styles.viewerContainer} ${showViewer ? styles.viewerVisible : styles.viewerHidden}`}
+      className={`${styles.viewerContainer} ${selectedIndex !== null ? styles.viewerVisible : styles.viewerHidden}`}
     >
       <div className={styles.viewerContent}>
         <div className={styles.imageWrapper}>
-          {showLoader && (
+          {/* {showLoader && (
             <div className={styles.loadSpinner}>
               <AiOutlineLoading3Quarters />
             </div>
-          )}
+          )} */}
 
-          <div className={`${styles.imageContainer} ${showImage ? styles.visible : styles.hidden}`}>
-            {src && (
-              <Image
-                src={src}
-                layout="fill"
-                objectFit="contain"
-                alt={alt}
-                onLoad={() => {
-                  if (currentImageIndex === selectedIndex) {
-                    //setShowLoader(false)
-                  }
-                  console.log('loaded with phase', phase)
-                  setNextImageReady(true)
-                  if (phase === 'enter') {
-                    setShowImage(true)
-                  }
-                }}
-              />
-            )}
-          </div>
+          {album?.images &&
+            album.images.map((image, i) => {
+              const n = album.images.length
+              const directDist = Math.abs(i - selectedIndex)
+              const wrappedDist = n - directDist
+              const circularDist = Math.min(directDist, wrappedDist)
+
+              // If circularDist <= 2, it's within range to the left or right
+              const isInRange = circularDist <= 2
+              const alt = album?.images[i].alt || 'Default image'
+
+              // console.log('image', i, 'isInRange', isInRange)
+              // Optionally skip rendering if not in range:
+
+              return (
+                <div
+                  className={`${styles.imageContainer}`}
+                  style={{ opacity: i === selectedIndex ? 1 : 0 }}
+                  key={i}
+                >
+                  {selectedIndex !== null && image.url && isInRange && (
+                    <Image
+                      src={image.url}
+                      fill
+                      style={{ objectFit: 'contain' }}
+                      alt={alt}
+                      onLoad={() => {}}
+                    />
+                  )}
+                </div>
+              )
+            })}
+
           <div className={styles.prevButton}>
             <Link href={`/artwork/album/${album.slug}/image/${prevIndex}`}>
               <RiArrowLeftSLine />
@@ -139,7 +113,6 @@ export default function ImageViewer({}) {
           <Link
             href={`/artwork/album/${album.slug}`}
             onClick={() => {
-              setShowImage(false)
               setSelectedIndex(null)
             }}
           >

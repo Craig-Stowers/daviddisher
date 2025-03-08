@@ -22,17 +22,14 @@ export default function GalleryServer({ images, getUrlFromIndex, getTitleFromInd
 
         return (
           <div className={styles.cardContainer} key={item.id + `_${i}`}>
-            <div className={styles.card}>
-              {/* <Link className="card" href={`/album/${gallerySlug}/image/${i}`} passHref> */}
-              <Link className="card" href={getUrlFromIndex(i)} passHref>
+            <Link href={getUrlFromIndex(i)} passHref>
+              <div className={styles.card}>
+                {/* <Link className="card" href={`/album/${gallerySlug}/image/${i}`} passHref> */}
+
                 <Image
                   src={src}
-                  // width={width}
-                  // height={height}
-                  // width={180}
-                  // height={180}
-                  layout="fill"
-                  objectFit="cover"
+                  fill
+                  style={{ objectFit: 'cover' }}
                   alt={alt}
                   placeholder="blur"
                   blurDataURL="data:image/png;base64,..." // Optional placeholder
@@ -40,8 +37,8 @@ export default function GalleryServer({ images, getUrlFromIndex, getTitleFromInd
                   // loading="lazy"
                   sizes="(max-width: 640px) 50vw, (max-width: 1024px) 25vw, 20vw"
                 />
-              </Link>
-            </div>
+              </div>
+            </Link>
             <div className={styles.cardHoverContainer}>
               <div className={styles.cardText}>{getTitleFromIndex(i)}</div>
             </div>

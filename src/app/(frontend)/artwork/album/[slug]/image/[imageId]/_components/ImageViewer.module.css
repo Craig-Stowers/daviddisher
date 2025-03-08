@@ -62,12 +62,14 @@
 }
 
 .imageContainer {
-  position: relative;
-  margin-left: auto;
-  margin-right: auto;
+  position: absolute;
+
+  left: 50%;
+  transform: translateX(-50%);
+
   height: 100%;
   width: calc(100% - 160px);
-  transition: opacity 0.25s;
+  transition: opacity 0.4s linear;
 }
 
 .prevButton,
