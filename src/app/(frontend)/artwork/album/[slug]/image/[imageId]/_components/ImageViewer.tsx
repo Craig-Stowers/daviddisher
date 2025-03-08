@@ -25,7 +25,7 @@ export default function ImageViewer({}) {
       setCurrentImageIndex(selectedIndex)
       timer = setTimeout(() => {
         setShowImage(true)
-      }, 340)
+      }, 300)
       return () => clearTimeout(timer)
     }
     if (selectedIndex !== currentImageIndex) {
@@ -41,12 +41,8 @@ export default function ImageViewer({}) {
         }
       }, 300)
 
-      const loaderTimer = setTimeout(() => {
-        setShowLoader(true)
-      }, 450)
       return () => {
         clearTimeout(timer)
-        clearTimeout(loaderTimer)
       }
     }
     //setShowImage(true)
@@ -55,6 +51,13 @@ export default function ImageViewer({}) {
   useEffect(() => {
     setShowLoader(false)
   }, [selectedIndex])
+
+  useEffect(() => {
+    const loaderTimer = setTimeout(() => {
+      setShowLoader(true)
+    }, 220)
+    return () => clearTimeout(loaderTimer)
+  }, [currentImageIndex])
   useEffect(() => {
     const nextIndex = selectedIndex < album.images.length - 1 ? selectedIndex + 1 : 0
     const prevIndex = selectedIndex > 0 ? selectedIndex - 1 : album.images.length - 1
@@ -93,6 +96,7 @@ export default function ImageViewer({}) {
     >
       <div className={styles.viewerContent}>
         <div className={styles.imageWrapper}>
+          <div>SHOW LOADER: {showLoader ? 'TRUE' : 'FALSE'}</div>
           {showLoader && (
             <div className={styles.loadSpinner}>
               <AiOutlineLoading3Quarters />
