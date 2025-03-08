@@ -55,7 +55,7 @@ export default function ImageViewer({}) {
   useEffect(() => {
     const loaderTimer = setTimeout(() => {
       setShowLoader(true)
-    }, 220)
+    }, 300)
     return () => clearTimeout(loaderTimer)
   }, [currentImageIndex])
   useEffect(() => {
@@ -96,7 +96,6 @@ export default function ImageViewer({}) {
     >
       <div className={styles.viewerContent}>
         <div className={styles.imageWrapper}>
-          <div>SHOW LOADER: {showLoader ? 'TRUE' : 'FALSE'}</div>
           {showLoader && (
             <div className={styles.loadSpinner}>
               <AiOutlineLoading3Quarters />
