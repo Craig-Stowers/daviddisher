@@ -1,11 +1,13 @@
 'use client'
 import Image from 'next/image'
+import { useRouter } from 'next/navigation'
 import { useAlbum } from '@/app/(frontend)/artwork/album/[slug]/AlbumProvider'
 import { RiArrowLeftSLine, RiArrowRightSLine } from 'react-icons/ri'
 import { IoCloseSharp } from 'react-icons/io5'
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import styles from './ImageViewer.module.css'
+import { AiOutlineLoading3Quarters } from 'react-icons/ai'
 
 export default function ImageViewer({}) {
   const [currentImageIndex, setCurrentImageIndex] = useState(null)
@@ -13,9 +15,12 @@ export default function ImageViewer({}) {
   const { selectedIndex, setSelectedIndex, album } = useAlbum()
   const [phase, setPhase] = useState('enter')
   const [nextImageReady, setNextImageReady] = useState(false)
+  const router = useRouter()
+  const [showLoader, setShowLoader] = useState(true)
 
   useEffect(() => {
     let timer
+
     if (currentImageIndex == null && selectedIndex != null) {
       setCurrentImageIndex(selectedIndex)
       timer = setTimeout(() => {
@@ -32,14 +37,38 @@ export default function ImageViewer({}) {
         setCurrentImageIndex(selectedIndex)
         if (nextImageReady) {
           setShowImage(true)
+          //setShowLoader(false)
         }
-      }, 500)
-      return () => clearTimeout(timer)
+      }, 300)
+
+      const loaderTimer = setTimeout(() => {
+        setShowLoader(true)
+      }, 450)
+      return () => {
+        clearTimeout(timer)
+        clearTimeout(loaderTimer)
+      }
     }
     //setShowImage(true)
   }, [selectedIndex, album, currentImageIndex, nextImageReady])
 
-  useEffect(() => {}, [album])
+  useEffect(() => {
+    setShowLoader(false)
+  }, [selectedIndex])
+  useEffect(() => {
+    const nextIndex = selectedIndex < album.images.length - 1 ? selectedIndex + 1 : 0
+    const prevIndex = selectedIndex > 0 ? selectedIndex - 1 : album.images.length - 1
+    router.prefetch(`/artwork/album/${album.slug}/image/${prevIndex}`)
+    router.prefetch(`/artwork/album/${album.slug}/image/${nextIndex}`)
+
+    const img = new window.Image()
+    const nextSrc = album.images[nextIndex].url
+    img.src = nextSrc
+
+    const img2 = new window.Image()
+    const prevSrc = album.images[prevIndex].url
+    img2.src = prevSrc
+  }, [album.images.length, selectedIndex, album.slug])
 
   const alt =
     currentImageIndex !== null
@@ -51,10 +80,10 @@ export default function ImageViewer({}) {
   const showViewer = selectedIndex != null
 
   const title =
-    currentImageIndex !== null ? album?.images[currentImageIndex].title || 'Untitled' : 'Untitled'
+    currentImageIndex !== null ? album?.images[selectedIndex]?.title || 'Untitled' : 'Untitled'
 
   const subtitle =
-    currentImageIndex !== null ? album?.images[currentImageIndex].subtitle || null : null
+    currentImageIndex !== null ? album?.images[selectedIndex]?.subtitle || null : null
 
   // console.log('image in focus', album?.images[currentImageIndex])
 
@@ -64,9 +93,12 @@ export default function ImageViewer({}) {
     >
       <div className={styles.viewerContent}>
         <div className={styles.imageWrapper}>
-          {/* <div>
-            index: {selectedIndex}, showImage: {showImage ? 'true' : 'false'}, phase: {phase}
-          </div> */}
+          {showLoader && (
+            <div className={styles.loadSpinner}>
+              <AiOutlineLoading3Quarters />
+            </div>
+          )}
+
           <div className={`${styles.imageContainer} ${showImage ? styles.visible : styles.hidden}`}>
             {src && (
               <Image
@@ -75,9 +107,9 @@ export default function ImageViewer({}) {
                 objectFit="contain"
                 alt={alt}
                 onLoad={() => {
-                  // if (currentImageIndex === selectedIndex) {
-                  //   return null
-                  // }
+                  if (currentImageIndex === selectedIndex) {
+                    //setShowLoader(false)
+                  }
                   console.log('loaded with phase', phase)
                   setNextImageReady(true)
                   if (phase === 'enter') {
