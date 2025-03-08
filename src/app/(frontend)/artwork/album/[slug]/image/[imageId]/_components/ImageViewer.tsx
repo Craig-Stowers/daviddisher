@@ -58,20 +58,22 @@ export default function ImageViewer({}) {
     }, 350)
     return () => clearTimeout(loaderTimer)
   }, [currentImageIndex])
-  useEffect(() => {
-    const nextIndex = selectedIndex < album.images.length - 1 ? selectedIndex + 1 : 0
-    const prevIndex = selectedIndex > 0 ? selectedIndex - 1 : album.images.length - 1
-    router.prefetch(`/artwork/album/${album.slug}/image/${prevIndex}`)
-    router.prefetch(`/artwork/album/${album.slug}/image/${nextIndex}`)
+  // useEffect(() => {
+  //   const nextIndex = selectedIndex < album.images.length - 1 ? selectedIndex + 1 : 0
+  //   const prevIndex = selectedIndex > 0 ? selectedIndex - 1 : album.images.length - 1
+  //   router.prefetch(`/artwork/album/${album.slug}/image/${prevIndex}`)
+  //   router.prefetch(`/artwork/album/${album.slug}/image/${nextIndex}`)
+  //prefetching liek above might only render the basic page and not image due to all the event listeners. Future update to instantly render a opacity 0 image could be the solution.
 
-    const img = new window.Image()
-    const nextSrc = album.images[nextIndex].url
-    img.src = nextSrc
+  //this method of prefetching not working because Next delivers optimsed versions and not always the raw image src.
+  // const img = new window.Image()
+  // const nextSrc = album.images[nextIndex].url
+  // img.src = nextSrc
 
-    const img2 = new window.Image()
-    const prevSrc = album.images[prevIndex].url
-    img2.src = prevSrc
-  }, [album.images.length, selectedIndex, album.slug])
+  // const img2 = new window.Image()
+  // const prevSrc = album.images[prevIndex].url
+  // img2.src = prevSrc
+  // }, [album.images.length, selectedIndex, album.slug])
 
   const alt =
     currentImageIndex !== null
