@@ -39,7 +39,7 @@ export default function ImageViewer({}) {
           setShowImage(true)
           //setShowLoader(false)
         }
-      }, 300)
+      }, 250)
 
       return () => {
         clearTimeout(timer)
@@ -55,7 +55,7 @@ export default function ImageViewer({}) {
   useEffect(() => {
     const loaderTimer = setTimeout(() => {
       setShowLoader(true)
-    }, 300)
+    }, 350)
     return () => clearTimeout(loaderTimer)
   }, [currentImageIndex])
   useEffect(() => {
