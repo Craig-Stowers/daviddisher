@@ -11,6 +11,8 @@ export default function ImageViewer({}) {
   const [currentImageIndex, setCurrentImageIndex] = useState(null)
   const [showImage, setShowImage] = useState(false)
   const { selectedIndex, setSelectedIndex, album } = useAlbum()
+  const [phase, setPhase] = useState('enter')
+  const [nextImageReady, setNextImageReady] = useState(false)
 
   useEffect(() => {
     let timer
@@ -22,15 +24,20 @@ export default function ImageViewer({}) {
       return () => clearTimeout(timer)
     }
     if (selectedIndex !== currentImageIndex) {
+      setNextImageReady(false)
       setShowImage(false)
+      setPhase('exit')
       timer = setTimeout(() => {
+        setPhase('enter')
         setCurrentImageIndex(selectedIndex)
-        setShowImage(true)
-      }, 340)
+        if (nextImageReady) {
+          setShowImage(true)
+        }
+      }, 500)
       return () => clearTimeout(timer)
     }
-    setShowImage(true)
-  }, [selectedIndex, album, currentImageIndex])
+    //setShowImage(true)
+  }, [selectedIndex, album, currentImageIndex, nextImageReady])
 
   useEffect(() => {}, [album])
 
@@ -57,8 +64,28 @@ export default function ImageViewer({}) {
     >
       <div className={styles.viewerContent}>
         <div className={styles.imageWrapper}>
+          {/* <div>
+            index: {selectedIndex}, showImage: {showImage ? 'true' : 'false'}, phase: {phase}
+          </div> */}
           <div className={`${styles.imageContainer} ${showImage ? styles.visible : styles.hidden}`}>
-            {src && <Image src={src} layout="fill" objectFit="contain" alt={alt} />}
+            {src && (
+              <Image
+                src={src}
+                layout="fill"
+                objectFit="contain"
+                alt={alt}
+                onLoad={() => {
+                  // if (currentImageIndex === selectedIndex) {
+                  //   return null
+                  // }
+                  console.log('loaded with phase', phase)
+                  setNextImageReady(true)
+                  if (phase === 'enter') {
+                    setShowImage(true)
+                  }
+                }}
+              />
+            )}
           </div>
           <div className={styles.prevButton}>
             <Link href={`/artwork/album/${album.slug}/image/${prevIndex}`}>

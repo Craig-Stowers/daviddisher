@@ -11,7 +11,7 @@ export default function GalleryServer({ images, getUrlFromIndex, getTitleFromInd
       {images?.map((item, i) => {
         // If item is a string, it's an ID, so we can't use it directly
         if (typeof item === 'string') {
-          return <p key={item}>Loading image...</p> // Handle missing data gracefully
+          return <p key={i}>Loading image...</p> // Handle missing data gracefully
         }
 
         // Ensure src is always a valid string
@@ -20,10 +20,8 @@ export default function GalleryServer({ images, getUrlFromIndex, getTitleFromInd
         // const height = item.height ?? 100 // Default height if missing
         const alt = item.alt || 'Default image'
 
-        console.log('load Gallery Image src', src)
-
         return (
-          <div className={styles.cardContainer} key={item.id}>
+          <div className={styles.cardContainer} key={item.id + `_${i}`}>
             <div className={styles.card}>
               {/* <Link className="card" href={`/album/${gallerySlug}/image/${i}`} passHref> */}
               <Link className="card" href={getUrlFromIndex(i)} passHref>
