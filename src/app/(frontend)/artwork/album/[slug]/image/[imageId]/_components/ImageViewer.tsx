@@ -9,18 +9,6 @@ import Link from 'next/link'
 import styles from './ImageViewer.module.css'
 import { AiOutlineLoading3Quarters } from 'react-icons/ai'
 
-const dummySources = [
-  'source1',
-  'source2',
-  'source3',
-  'source4',
-  'source5',
-  'source6',
-  'source7',
-  'source8',
-  'source9',
-]
-
 export default function ImageViewer({}) {
   const { selectedIndex, setSelectedIndex, album } = useAlbum()
 
@@ -53,6 +41,8 @@ export default function ImageViewer({}) {
 
   // console.log('image in focus', album?.images[currentImageIndex])
 
+  console.log('selected index', selectedIndex)
+
   return (
     <div
       className={`${styles.viewerContainer} ${selectedIndex !== null ? styles.viewerVisible : styles.viewerHidden}`}
@@ -76,13 +66,31 @@ export default function ImageViewer({}) {
               const isInRange = circularDist <= 2
               const alt = album?.images[i].alt || 'Default image'
 
+              let leftPercent = 50
+              let scale = 1
+
+              if (i === prevIndex) {
+                leftPercent = 30
+                scale = 0.7
+              }
+
+              if (i === nextIndex) {
+                leftPercent = 70
+                scale = 0.7
+              }
+
               // console.log('image', i, 'isInRange', isInRange)
               // Optionally skip rendering if not in range:
 
               return (
                 <div
                   className={`${styles.imageContainer}`}
-                  style={{ opacity: i === selectedIndex ? 1 : 0 }}
+                  style={{
+                    opacity: i === selectedIndex ? 1 : 0,
+                    left: `${leftPercent}%`,
+                    transform: `translateX(-50%) scale(${scale})`,
+                    zIndex: i === selectedIndex ? 1 : 0,
+                  }}
                   key={i}
                 >
                   {selectedIndex !== null && image.url && isInRange && (
