@@ -1,20 +1,27 @@
 .gallery {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  grid-gap: 24px;
+  grid-gap: 20px;
   justify-content: center;
-  max-width: 80%;
+  max-width: 88%;
   margin-left: auto;
   margin-right: auto;
 }
 
 .cardContainer {
   position: relative;
-  width: 220px;
-  height: 170px;
+  /* width: 220px; */
+  /* height: 170px; */
   overflow: hidden;
   border-radius: 0px;
   cursor: pointer;
+  margin-bottom: 20px;
+}
+
+.gridCardContainer {
+  width: 220px;
+  height: 170px;
+  margin-bottom: 0px;
 }
 
 .cardContainer:hover .card {

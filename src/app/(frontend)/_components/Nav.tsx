@@ -19,7 +19,7 @@ const Nav = () => {
           <Link href="/about">ABOUT</Link>
         </li>
         <li className={pathname.startsWith('/timeline') ? styles.active : ''}>
-          <Link href="/about">TIMELINE</Link>
+          <Link href="/timeline">TIMELINE</Link>
         </li>
         <li className={pathname.startsWith('/contact') ? styles.active : ''}>
           <Link href="/contact">CONTACT</Link>

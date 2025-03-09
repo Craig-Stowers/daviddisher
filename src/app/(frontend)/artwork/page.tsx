@@ -1,6 +1,7 @@
 import React from 'react'
 import { getAllAlbums } from '@/lib/getData'
-import GalleryServer from '@/app/(frontend)/_gallery/GalleryServer'
+//import GalleryServer from '@/app/(frontend)/_gallery/GalleryServer'
+import GalleryGrid from '../_gallery/GalleryGrid'
 
 export default async function Artwork() {
   const albums = await getAllAlbums()
@@ -13,7 +14,9 @@ export default async function Artwork() {
       <h2>ALBUMS</h2>
       {albums.length === 0 && <p>No albums found</p>}
       {albums.length > 0 && (
-        <GalleryServer
+        <GalleryGrid
+          imageWidth={220}
+          imageHeight={220}
           images={images}
           getUrlFromIndex={(index) => {
             return `artwork/album/${slugs[index]}`

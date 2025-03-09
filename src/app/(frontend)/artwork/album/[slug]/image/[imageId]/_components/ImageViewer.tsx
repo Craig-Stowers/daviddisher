@@ -31,17 +31,22 @@ export default function ImageViewer({}) {
   // img2.src = prevSrc
   // }, [album.images.length, selectedIndex, album.slug])
 
-  const nextIndex = selectedIndex < album.images.length - 1 ? selectedIndex + 1 : 0
-  const prevIndex = selectedIndex > 0 ? selectedIndex - 1 : album.images.length - 1
+  const images = album?.images
 
-  const title =
-    selectedIndex !== null ? album?.images[selectedIndex]?.title || 'Untitled' : 'Untitled'
+  // if (images.length === 2) {
+  //   images = [...images, ...images]
+  // }
 
-  const subtitle = selectedIndex !== null ? album?.images[selectedIndex]?.subtitle || null : null
+  const nextIndex = selectedIndex < images.length - 1 ? selectedIndex + 1 : 0
+  const prevIndex = selectedIndex > 0 ? selectedIndex - 1 : images.length - 1
+
+  const title = selectedIndex !== null ? images[selectedIndex]?.title || 'Untitled' : 'Untitled'
+
+  const subtitle = selectedIndex !== null ? images[selectedIndex]?.subtitle || null : null
 
   // console.log('image in focus', album?.images[currentImageIndex])
 
-  console.log('selected index', selectedIndex)
+  console.log('render index', selectedIndex, prevIndex, nextIndex)
 
   return (
     <div
@@ -55,16 +60,17 @@ export default function ImageViewer({}) {
             </div>
           )} */}
 
-          {album?.images &&
-            album.images.map((image, i) => {
-              const n = album.images.length
+          {selectedIndex !== null &&
+            images &&
+            images.map((image, i) => {
+              const n = images.length
               const directDist = Math.abs(i - selectedIndex)
               const wrappedDist = n - directDist
               const circularDist = Math.min(directDist, wrappedDist)
 
               // If circularDist <= 2, it's within range to the left or right
               const isInRange = circularDist <= 2
-              const alt = album?.images[i].alt || 'Default image'
+              const alt = images[i].alt || 'Default image'
 
               let leftPercent = 50
               let scale = 1
@@ -127,10 +133,12 @@ export default function ImageViewer({}) {
             <IoCloseSharp />
           </Link>
         </div>
-        <div className={styles.caption}>
-          <p className={styles.title}>{title}</p>
-          <p className={styles.subtitle}>{subtitle}</p>
-        </div>
+        {selectedIndex !== null && (
+          <div className={styles.caption}>
+            <p className={styles.title}>{title}</p>
+            <p className={styles.subtitle}>{subtitle}</p>
+          </div>
+        )}
       </div>
     </div>
   )

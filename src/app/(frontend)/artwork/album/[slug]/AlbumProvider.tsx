@@ -1,5 +1,5 @@
 'use client'
-import { createContext, useContext, useState } from 'react'
+import { createContext, useContext, useState, useEffect } from 'react'
 
 // Define type for image items
 export interface ImageItem {
@@ -25,6 +25,10 @@ export function AlbumProvider({ children, albumData }) {
   const [album, setAlbum] = useState(albumData)
   const [selectedIndex, setSelectedIndex] = useState(null)
   // const [album, setAlbum] = useState({ slug: null, images: [] })
+
+  useEffect(() => {
+    window.scrollTo(0, 0) // Scroll to top of page
+  }, [album])
 
   return (
     <AlbumContext.Provider value={{ album, setAlbum, selectedIndex, setSelectedIndex }}>
