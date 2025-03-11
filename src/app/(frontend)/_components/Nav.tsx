@@ -8,21 +8,21 @@ const Nav = () => {
 
   return (
     <nav className={styles.nav}>
-      <h1>
+      <h1 style={{ fontWeight: 900 }}>
         <Link href="/">David Disher</Link>
       </h1>
       <ul>
         <li className={pathname.startsWith('/artwork') ? styles.active : ''}>
-          <Link href="/artwork">ARTWORK</Link>
+          <Link href="/artwork">Artwork</Link>
         </li>
         <li className={pathname.startsWith('/about') ? styles.active : ''}>
-          <Link href="/about">ABOUT</Link>
+          <Link href="/about">About</Link>
         </li>
         <li className={pathname.startsWith('/timeline') ? styles.active : ''}>
-          <Link href="/timeline">TIMELINE</Link>
+          <Link href="/timeline">Timeline</Link>
         </li>
         <li className={pathname.startsWith('/contact') ? styles.active : ''}>
-          <Link href="/contact">CONTACT</Link>
+          <Link href="/contact">Contact</Link>
         </li>
       </ul>
     </nav>

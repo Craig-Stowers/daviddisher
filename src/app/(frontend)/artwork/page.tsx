@@ -11,7 +11,7 @@ export default async function Artwork() {
 
   return (
     <div className="page artwork">
-      <h2>ALBUMS</h2>
+      <h2>Albums</h2>
       {albums.length === 0 && <p>No albums found</p>}
       {albums.length > 0 && (
         <GalleryGrid
