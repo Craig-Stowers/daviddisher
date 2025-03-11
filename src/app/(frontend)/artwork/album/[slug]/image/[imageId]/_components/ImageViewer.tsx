@@ -94,7 +94,7 @@ export default function ImageViewer({}) {
                   style={{
                     opacity: i === selectedIndex ? 1 : 0,
                     left: `${leftPercent}%`,
-                    transform: `translateX(-50%) scale(${scale})`,
+                    // transform: `translateX(-50%) scale(${scale})`,
                     zIndex: i === selectedIndex ? 1 : 0,
                   }}
                   key={i}
