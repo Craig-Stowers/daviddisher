@@ -1,5 +1,7 @@
 import { GlobalConfig } from 'payload'
 
+import { TimelineBlock } from '@/blocks/TimelineSection'
+
 const SiteSettings: GlobalConfig = {
   slug: 'site-settings',
   label: 'Site Settings',
@@ -62,6 +64,50 @@ const SiteSettings: GlobalConfig = {
           relationTo: 'interface-media',
           required: false,
           label: 'Icon',
+        },
+      ],
+    },
+
+    {
+      name: 'sections',
+      type: 'array',
+      label: 'Timeline Sections',
+      fields: [
+        {
+          name: 'title',
+          type: 'text',
+          required: true,
+        },
+        {
+          name: 'content',
+          type: 'array',
+          fields: [
+            {
+              name: 'title',
+              label: 'Section Title',
+              type: 'text',
+              required: true,
+            },
+            {
+              name: 'entries',
+              label: 'Entries',
+              type: 'array',
+              admin: {
+                isSortable: true,
+              },
+              fields: [
+                {
+                  name: 'text',
+                  label: 'Entry',
+                  type: 'richText',
+                  required: true,
+                },
+              ],
+            },
+          ],
+          admin: {
+            isSortable: true,
+          },
         },
       ],
     },

@@ -1,7 +1,7 @@
 import { AlbumProvider } from './AlbumProvider'
 import ImageViewer from './image/[imageId]/_components/ImageViewer'
 import { getAlbumData } from '@/lib/getData'
-import GalleryServer from '../../../_gallery/GalleryServer'
+import Gallery from '../../../_gallery/Gallery'
 import GalleryGrid from '@/app/(frontend)/_gallery/GalleryGrid'
 
 export default async function AlbumLayout(props) {
@@ -9,15 +9,13 @@ export default async function AlbumLayout(props) {
 
   const album = (await getAlbumData({ slug: newParams.slug })) || null
 
-  console.log('album', album)
-
   return (
     <div className="page">
       <h2>{album.name}</h2>
-      <GalleryServer
+      <Gallery
         columns={3}
         imageWidth={380}
-        scroll={false}
+        // scroll={false}
         images={album.images}
         getUrlFromIndex={(index) => {
           return `/artwork/album/${newParams.slug}/image/${index}`

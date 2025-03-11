@@ -1,3 +1,4 @@
+import { TimelineBlock } from '@/blocks/TimelineSection'
 import { CollectionConfig } from 'payload'
 
 const Timeline: CollectionConfig = {
@@ -6,31 +7,15 @@ const Timeline: CollectionConfig = {
     singular: 'Timeline Entry',
     plural: 'Timeline Entries',
   },
-  admin: {
-    useAsTitle: 'title',
-  },
+
   fields: [
     {
-      name: 'title',
-      label: 'Section Title',
-      type: 'text',
-      required: true,
-    },
-    {
-      name: 'entries',
-      label: 'Entries',
-      type: 'array',
+      name: 'content',
+      type: 'blocks',
+      blocks: [TimelineBlock], // Add block types here
       admin: {
         isSortable: true,
       },
-      fields: [
-        {
-          name: 'text',
-          label: 'Entry',
-          type: 'richText',
-          required: true,
-        },
-      ],
     },
   ],
 }

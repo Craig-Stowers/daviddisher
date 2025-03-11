@@ -21,6 +21,8 @@
     display: flex;
     gap: 12px;
   }
+
+  background-color: white;
 }
 
 .nav a {

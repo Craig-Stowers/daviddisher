@@ -14,7 +14,7 @@ html {
   font-size: 18px;
   line-height: 32px;
 
-  background: hsl(36, 75%, 58%);
+  /* background: hsl(291, 100%, 85%); */
   -webkit-font-smoothing: antialiased;
 }
 
@@ -154,9 +154,9 @@ svg {
 
 .page h2 {
   margin: 30px 0 30px 0;
-  font-size: 20px;
+  font-size: 30px;
   line-height: 32px;
-  font-weight: 500;
+  font-weight: 600;
 }
 
 .payl-admin__login__logo {

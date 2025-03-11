@@ -32,7 +32,7 @@ export default function GalleryServer({
   console.log('columnsArrays', columnsArrays)
 
   return (
-    <div className={styles.gallery} style={{ display: 'flex', flexWrap: 'wrap' }}>
+    <div className={styles.gallery2} style={{ display: 'flex', flexWrap: 'wrap' }}>
       {columnsArrays.map((column, i) => {
         return (
           <div key={i} style={{ flex: 1 }}>
@@ -49,33 +49,43 @@ export default function GalleryServer({
               const alt = item.alt || 'Default image'
 
               return (
-                <div
-                  className={styles.cardContainer}
-                  key={item.id + `_${i}`}
-                  // style={{ marginBottom: '1rem' }}
-                >
-                  <Link href={getUrlFromIndex(item.index)} passHref scroll={false}>
-                    <div className={styles.card}>
-                      {/* <Link className="card" href={`/album/${gallerySlug}/image/${i}`} passHref> */}
+                <div className={styles.galleryItem} key={item.id + `_${i}`}>
+                  <div className={styles.galleryItemPadding}>
+                    <div
+                      className={styles.cardContainerStatic}
 
-                      <Image
-                        src={src}
-                        // fill
-                        // style={{ objectFit: 'cover' }}
+                      // style={{ marginBottom: '1rem' }}
+                    >
+                      <Link href={getUrlFromIndex(item.index)} passHref scroll={false}>
+                        <div className={styles.card}>
+                          {/* <Link className="card" href={`/album/${gallerySlug}/image/${i}`} passHref> */}
 
-                        width={item.scaledWidth}
-                        height={item.scaledHeight}
-                        alt={alt}
-                        placeholder="blur"
-                        blurDataURL="data:image/png;base64,..." // Optional placeholder
-                        quality={50}
-                        // loading="lazy"
-                        sizes="(max-width: 640px) 50vw, (max-width: 1024px) 25vw, 20vw"
-                      />
-                    </div>
-                  </Link>
-                  <div className={styles.cardHoverContainer}>
+                          <div style={{ position: 'relative', width: '100%' }}>
+                            <Image
+                              src={src}
+                              style={{ width: '100%' }}
+                              width={0}
+                              height={0}
+                              // width={item.scaledWidth}
+                              // height={item.scaledHeight}
+                              alt={alt}
+                              placeholder="blur"
+                              blurDataURL="data:image/png;base64,..." // Optional placeholder
+                              quality={50}
+                              // loading="lazy"
+                              sizes="(max-width: 640px) 50vw, (max-width: 1024px) 25vw, 20vw"
+                            />
+                          </div>
+                        </div>
+                      </Link>
+
+                      <div className={styles.cardLabel}>
+                        <div className={styles.cardLabelText}>{getTitleFromIndex(item.index)}</div>
+                      </div>
+                      {/* <div className={styles.cardHoverContainer}>
                     <div className={styles.cardText}>{getTitleFromIndex(item.index)}</div>
+                  </div> */}
+                    </div>
                   </div>
                 </div>
               )

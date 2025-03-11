@@ -200,25 +200,32 @@ export interface Album {
  */
 export interface Timeline {
   id: string;
-  title: string;
-  entries?:
+  content?:
     | {
-        text: {
-          root: {
-            type: string;
-            children: {
-              type: string;
-              version: number;
-              [k: string]: unknown;
-            }[];
-            direction: ('ltr' | 'rtl') | null;
-            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-            indent: number;
-            version: number;
-          };
-          [k: string]: unknown;
-        };
+        title: string;
+        entries?:
+          | {
+              text: {
+                root: {
+                  type: string;
+                  children: {
+                    type: string;
+                    version: number;
+                    [k: string]: unknown;
+                  }[];
+                  direction: ('ltr' | 'rtl') | null;
+                  format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                  indent: number;
+                  version: number;
+                };
+                [k: string]: unknown;
+              };
+              id?: string | null;
+            }[]
+          | null;
         id?: string | null;
+        blockName?: string | null;
+        blockType: 'timeline-block';
       }[]
     | null;
   updatedAt: string;
@@ -365,12 +372,22 @@ export interface AlbumsSelect<T extends boolean = true> {
  * via the `definition` "timeline_select".
  */
 export interface TimelineSelect<T extends boolean = true> {
-  title?: T;
-  entries?:
+  content?:
     | T
     | {
-        text?: T;
-        id?: T;
+        'timeline-block'?:
+          | T
+          | {
+              title?: T;
+              entries?:
+                | T
+                | {
+                    text?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
       };
   updatedAt?: T;
   createdAt?: T;
@@ -439,6 +456,38 @@ export interface SiteSetting {
         id?: string | null;
       }[]
     | null;
+  sections?:
+    | {
+        title: string;
+        content?:
+          | {
+              title: string;
+              entries?:
+                | {
+                    text: {
+                      root: {
+                        type: string;
+                        children: {
+                          type: string;
+                          version: number;
+                          [k: string]: unknown;
+                        }[];
+                        direction: ('ltr' | 'rtl') | null;
+                        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                        indent: number;
+                        version: number;
+                      };
+                      [k: string]: unknown;
+                    };
+                    id?: string | null;
+                  }[]
+                | null;
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+      }[]
+    | null;
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -457,6 +506,24 @@ export interface SiteSettingsSelect<T extends boolean = true> {
     | {
         url?: T;
         icon?: T;
+        id?: T;
+      };
+  sections?:
+    | T
+    | {
+        title?: T;
+        content?:
+          | T
+          | {
+              title?: T;
+              entries?:
+                | T
+                | {
+                    text?: T;
+                    id?: T;
+                  };
+              id?: T;
+            };
         id?: T;
       };
   updatedAt?: T;
