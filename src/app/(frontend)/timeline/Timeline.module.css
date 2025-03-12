@@ -1,0 +1,58 @@
+.content {
+  padding: 20px;
+  max-width: 700px;
+  color: #333;
+}
+
+.content h2 {
+  width: 100%;
+  text-align: center;
+  margin-bottom: 40px;
+  font-size: 26px;
+  text-align: left;
+  font-family: 'Source Sans 3', sans-serif;
+  font-weight: 800;
+}
+
+.sections {
+  width: 100%;
+  text-align: left;
+  font-family: 'Source Sans 3', sans-serif;
+}
+
+.section {
+  margin-bottom: 80px;
+}
+
+.sections p {
+  margin: 0px;
+}
+
+.subSection {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 24px;
+}
+
+.subSection h4 {
+  margin: 0px;
+  margin-right: 40px;
+}
+
+.subSection ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0px;
+}
+
+.subSection ul li {
+  display: flex;
+  gap: 7px;
+}
+
+.subSection ul li::before {
+  content: '- '; /* Adds a dash before each item */
+}

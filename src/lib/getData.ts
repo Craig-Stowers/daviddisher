@@ -44,13 +44,13 @@ export const getGlobals = cache(async (slug) => {
   return result
 })
 
-export const getTimelineData = cache(async () => {
-  const payload = await getPayload({ config: configPromise })
+// export const getTimelineData = cache(async () => {
+//   const payload = await getPayload({ config: configPromise })
 
-  const result = await payload.find({
-    collection: 'timeline',
-    depth: 2, // Ensures full media objects are returned instead of just IDs
-  })
+//   const result = await payload.find({
+//     collection: 'timeline',
+//     depth: 2, // Ensures full media objects are returned instead of just IDs
+//   })
 
-  return result.docs || null
-})
+//   return result.docs || null
+// })

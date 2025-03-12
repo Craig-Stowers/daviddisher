@@ -1,0 +1,39 @@
+.contactList {
+}
+.contactList {
+  list-style: none;
+  padding: 0;
+
+  width: 100%;
+  max-width: 500px;
+}
+
+.contactList li {
+  background-color: white;
+  display: flex;
+  /* justify-content: space-between; */
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  height: 60px;
+  align-items: center;
+  padding-left: 20px;
+}
+
+.contactList .listLabel {
+  font-size: 18px;
+  font-weight: 500;
+  color: #333;
+  width: 140px;
+}
+
+.contactList a {
+  text-decoration: none;
+  color: #2285d0;
+}
+
+.contactList .socialIcon a {
+  display: flex;
+  font-size: 30px;
+  color: rgb(8, 102, 255);
+}

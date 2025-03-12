@@ -33,7 +33,7 @@ export default buildConfig({
       },
     },
   },
-  collections: [Users, Artwork, InterfaceMedia, Albums, Timeline],
+  collections: [Users, Artwork, InterfaceMedia, Albums],
   globals: [SiteSettings],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',

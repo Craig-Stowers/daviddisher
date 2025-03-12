@@ -79,12 +79,13 @@ const SiteSettings: GlobalConfig = {
           required: true,
         },
         {
-          name: 'content',
+          label: 'Sub Sections',
+          name: 'sub-section',
           type: 'array',
           fields: [
             {
               name: 'title',
-              label: 'Section Title',
+              label: 'Sub Section Title',
               type: 'text',
               required: true,
             },

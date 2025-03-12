@@ -1,27 +1,41 @@
-.nav {
+.wrapper {
   font-family: 'playfair display', serif;
   display: flex;
+  width: 100%;
+  background-color: white;
 
-  align-items: center;
   color: #222;
 
-  padding: 20px 20px 30px 60px;
-  max-width: 1360px;
-  margin: 0 auto;
+  padding: 10px 40px;
+
+  justify-content: center;
+
+  margin-bottom: 40px;
 
   @media (max-width: 400px) {
     padding: 24px;
-  }
-
-  .logo {
-    font-size: 24px;
-    font-weight: bold;
   }
 
   .links {
     display: flex;
     gap: 12px;
   }
+}
+
+.nav {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 1024px;
+}
+
+.logo {
+  font-size: 43px;
+  line-height: 40px;
+  font-weight: 900;
+
+  display: flex;
+  align-items: center;
 }
 
 .nav a {
