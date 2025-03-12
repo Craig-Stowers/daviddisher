@@ -29,7 +29,6 @@ export default function GalleryServer({
 
     columnsArrays[shorestColumn].push(image)
   })
-  console.log('columnsArrays', columnsArrays)
 
   return (
     <div className={styles.gallery2} style={{ display: 'flex', flexWrap: 'wrap' }}>

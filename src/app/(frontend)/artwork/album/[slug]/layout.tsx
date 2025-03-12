@@ -25,6 +25,8 @@ export default async function AlbumLayout(props) {
 
   const isPreRender = typeof window === 'undefined'
 
+  console.log('layout isPreRender', isPreRender)
+
   return (
     <div className="page">
       <h2>{album.name}</h2>

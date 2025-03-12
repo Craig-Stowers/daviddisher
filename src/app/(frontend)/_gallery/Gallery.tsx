@@ -29,7 +29,6 @@ export default function Gallery({
 
     columnsArrays[shorestColumn].push(image)
   })
-  console.log('columnsArrays', columnsArrays)
 
   return (
     <div className={styles.gallery2}>

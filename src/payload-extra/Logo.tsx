@@ -4,7 +4,6 @@ import Image from 'next/image'
 
 export default async function Logo() {
   const siteSettings = await getGlobals('site-settings')
-  console.log('siteSettings', siteSettings)
 
   const potraitSrc = siteSettings?.portrait?.url || null
   return (

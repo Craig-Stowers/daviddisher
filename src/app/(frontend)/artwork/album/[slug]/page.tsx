@@ -15,13 +15,16 @@ export async function generateStaticParams() {
   const albums = await payload.find({
     collection: 'albums',
     depth: 1,
+    limit: 0,
   })
 
-  return albums.docs.map((album) => ({
+  const staticParams = albums.docs.map((album) => ({
     params: {
       slug: album.slug,
     },
   }))
+  console.log('staticParams', staticParams)
+  return staticParams
 }
 
 export default async function AlbumPage() {

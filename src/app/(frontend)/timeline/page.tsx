@@ -9,8 +9,6 @@ export default async function TimelinePage() {
 
   const sections = timelineData?.sections
 
-  console.log('sections', sections)
-
   const renderSubSection = (subSection) => {
     return (
       <div className={styles.subSection} key={subSection.id}>

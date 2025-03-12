@@ -14,8 +14,6 @@ export default function ImageViewer({ isPreRender }) {
 
   const [showLoader, setShowLoader] = useState([])
 
-  console.log('isPreRender', isPreRender)
-
   // useEffect(() => {
   //   const nextIndex = selectedIndex < album.images.length - 1 ? selectedIndex + 1 : 0
   //   const prevIndex = selectedIndex > 0 ? selectedIndex - 1 : album.images.length - 1
@@ -56,8 +54,6 @@ export default function ImageViewer({ isPreRender }) {
   }
 
   // console.log('image in focus', album?.images[currentImageIndex])
-
-  console.log('render index', selectedIndex, 'loaded', showLoader)
 
   return (
     <div
