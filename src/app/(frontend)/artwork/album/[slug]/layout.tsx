@@ -11,19 +11,17 @@ export default async function AlbumLayout(props) {
 
   const album = (await getAlbumData({ slug: newParams.slug })) || null
 
-  const preloadUrls = album.images
-    .map((image) => {
-      // ✅ Only return `image.url` if `image` is an object and has `url`
-      if (typeof image === 'object' && 'url' in image) {
-        return image.url
-      }
-      return null // Fallback for invalid cases
-    })
-    .filter((url): url is string => url !== null) // ✅ Remove null values
+  // const preloadUrls = album.images
+  //   .map((image) => {
+  //     // ✅ Only return `image.url` if `image` is an object and has `url`
+  //     if (typeof image === 'object' && 'url' in image) {
+  //       return image.url
+  //     }
+  //     return null // Fallback for invalid cases
+  //   })
+  //   .filter((url): url is string => url !== null) // ✅ Remove null values
 
-  await preloadImages(preloadUrls)
-
-  console.log('preloadUrls', preloadUrls)
+  // await preloadImages(preloadUrls)
 
   const isPreRender = typeof window === 'undefined'
 
