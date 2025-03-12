@@ -105,7 +105,7 @@ export default function ImageViewer({ isPreRender }) {
                       onLoad={() => {
                         handleImageLoaded(i)
                       }}
-                      sizes="80vw"
+                      sizes="50vw"
                     />
                   )}
                   {!showLoader[i] && (
