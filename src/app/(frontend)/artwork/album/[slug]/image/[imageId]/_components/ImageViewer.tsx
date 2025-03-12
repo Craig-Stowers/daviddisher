@@ -45,15 +45,12 @@ export default function ImageViewer({ isPreRender }) {
   const subtitle = selectedIndex !== null ? images[selectedIndex]?.subtitle || null : null
 
   const handleImageLoaded = (index) => {
-    console.log('loaded', index)
     setShowLoader((prev) => {
       const showLoaderCopy = [...prev]
       showLoaderCopy[index] = true
       return showLoaderCopy
     })
   }
-
-  // console.log('image in focus', album?.images[currentImageIndex])
 
   return (
     <div
@@ -86,9 +83,6 @@ export default function ImageViewer({ isPreRender }) {
                 scale = 0.7
               }
 
-              // console.log('image', i, 'isInRange', isInRange)
-              // Optionally skip rendering if not in range:
-
               return (
                 <div
                   className={`${styles.imageContainer}`}
@@ -106,11 +100,12 @@ export default function ImageViewer({ isPreRender }) {
                       fill
                       style={{ objectFit: 'contain' }}
                       alt={alt}
-                      quality={80}
+                      quality={75}
                       priority={true}
                       onLoad={() => {
                         handleImageLoaded(i)
                       }}
+                      sizes="80vw"
                     />
                   )}
                   {!showLoader[i] && (

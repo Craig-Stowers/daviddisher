@@ -74,8 +74,6 @@ export const getFormattedTitles = (filename) => {
 
   const formatedDate = testDate ? new Date(testDate).toISOString() : null
 
-  console.log('formatted date', formatedDate)
-
   return {
     title: formattedFilename,
     alt: formattedFilename,

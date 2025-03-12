@@ -8,7 +8,6 @@ export default async function BioPage() {
   const siteSettings = await getGlobals('site-settings')
 
   const portrait = siteSettings.portrait
-  console.log('siteSettings', siteSettings)
 
   return (
     <div className={`page ${styles.Biography}`}>

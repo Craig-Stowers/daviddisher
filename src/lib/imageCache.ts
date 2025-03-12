@@ -5,7 +5,7 @@ export async function preloadImages(imageUrls) {
     imageUrls.map((url) => {
       // Ensure the URL is absolute
       const absoluteUrl = url.startsWith('http') ? url : `${BASE_URL}${url}`
-      console.log('prefetch image', absoluteUrl)
+      // console.log('prefetch image', absoluteUrl)
       return fetch(absoluteUrl, {
         cache: 'force-cache',
         next: { revalidate: 86400 }, // Cache for 24 hours

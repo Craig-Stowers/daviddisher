@@ -13,7 +13,7 @@ import configPromise from '@payload-config'
 //     })
 
 //     if (!artworks.length) {
-//       console.log('❌ No artworks found.')
+//
 //       return
 //     }
 

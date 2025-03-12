@@ -12,13 +12,6 @@ export default async function HomePage() {
   const siteSettings = await getGlobals('site-settings')
 
   // Define type for media items
-  interface MediaItem {
-    id: string
-    url?: string | null
-    width?: number | null
-    height?: number | null
-    alt?: string | null
-  }
 
   const frontPageArt = siteSettings.frontPageArt
 

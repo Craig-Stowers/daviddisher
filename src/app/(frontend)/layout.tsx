@@ -22,6 +22,7 @@ import Link from 'next/link'
 // }
 
 export default async function RootLayout(props: { children: React.ReactNode }) {
+  console.log('RootLayout!!!')
   return (
     <html>
       <body>
