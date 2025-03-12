@@ -12,7 +12,7 @@ import { AiOutlineLoading3Quarters } from 'react-icons/ai'
 export default function ImageViewer({}) {
   const { selectedIndex, setSelectedIndex, album } = useAlbum()
 
-  const [showLoader, setShowLoader] = useState(true)
+  const [showLoader, setShowLoader] = useState([])
 
   // useEffect(() => {
   //   const nextIndex = selectedIndex < album.images.length - 1 ? selectedIndex + 1 : 0
@@ -44,9 +44,18 @@ export default function ImageViewer({}) {
 
   const subtitle = selectedIndex !== null ? images[selectedIndex]?.subtitle || null : null
 
+  const handleImageLoaded = (index) => {
+    console.log('loaded', index)
+    setShowLoader((prev) => {
+      const showLoaderCopy = [...prev]
+      showLoaderCopy[index] = true
+      return showLoaderCopy
+    })
+  }
+
   // console.log('image in focus', album?.images[currentImageIndex])
 
-  console.log('render index', selectedIndex, prevIndex, nextIndex)
+  console.log('render index', selectedIndex, 'loaded', showLoader)
 
   return (
     <div
@@ -54,12 +63,6 @@ export default function ImageViewer({}) {
     >
       <div className={styles.viewerContent}>
         <div className={styles.imageWrapper}>
-          {/* {showLoader && (
-            <div className={styles.loadSpinner}>
-              <AiOutlineLoading3Quarters />
-            </div>
-          )} */}
-
           {selectedIndex !== null &&
             images &&
             images.map((image, i) => {
@@ -105,8 +108,16 @@ export default function ImageViewer({}) {
                       fill
                       style={{ objectFit: 'contain' }}
                       alt={alt}
-                      onLoad={() => {}}
+                      quality={80}
+                      onLoad={() => {
+                        handleImageLoaded(i)
+                      }}
                     />
+                  )}
+                  {!showLoader[i] && (
+                    <div className={styles.loadSpinner}>
+                      <AiOutlineLoading3Quarters />
+                    </div>
                   )}
                 </div>
               )
