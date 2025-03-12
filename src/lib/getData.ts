@@ -12,7 +12,7 @@ export const getAlbumData = cache(async ({ slug }: { slug: string }) => {
         equals: slug,
       },
     },
-    depth: 2, // Ensures full media objects are returned instead of just IDs
+    depth: 3, // Ensures full media objects are returned instead of just IDs
   })
 
   return result.docs?.[0] || null

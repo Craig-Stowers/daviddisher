@@ -9,10 +9,12 @@ import Link from 'next/link'
 import styles from './ImageViewer.module.css'
 import { AiOutlineLoading3Quarters } from 'react-icons/ai'
 
-export default function ImageViewer({}) {
+export default function ImageViewer({ isPreRender }) {
   const { selectedIndex, setSelectedIndex, album } = useAlbum()
 
   const [showLoader, setShowLoader] = useState([])
+
+  console.log('isPreRender', isPreRender)
 
   // useEffect(() => {
   //   const nextIndex = selectedIndex < album.images.length - 1 ? selectedIndex + 1 : 0

@@ -4,10 +4,28 @@ import { getAlbumData } from '@/lib/getData'
 import Gallery from '../../../_gallery/Gallery'
 import GalleryGrid from '@/app/(frontend)/_gallery/GalleryGrid'
 
+import { preloadImages } from '@/lib/imageCache'
+
 export default async function AlbumLayout(props) {
   const newParams = await props.params
 
   const album = (await getAlbumData({ slug: newParams.slug })) || null
+
+  const preloadUrls = album.images
+    .map((image) => {
+      // ✅ Only return `image.url` if `image` is an object and has `url`
+      if (typeof image === 'object' && 'url' in image) {
+        return image.url
+      }
+      return null // Fallback for invalid cases
+    })
+    .filter((url): url is string => url !== null) // ✅ Remove null values
+
+  await preloadImages(preloadUrls)
+
+  console.log('preloadUrls', preloadUrls)
+
+  const isPreRender = typeof window === 'undefined'
 
   return (
     <div className="page">
@@ -28,7 +46,7 @@ export default async function AlbumLayout(props) {
 
       <AlbumProvider albumData={album}>
         {props.children}
-        <ImageViewer />
+        <ImageViewer isPreRender={isPreRender} />
       </AlbumProvider>
     </div>
   )
