@@ -25,7 +25,7 @@ export default async function HomePage() {
           alt={frontPageArt.alt}
           quality={50}
           loading="lazy"
-          sizes="30vw"
+          sizes="40vw"
         />
         {/* {media.docs.map((item: MediaItem) => {
           // Ensure src is always a valid string
