@@ -109,6 +109,7 @@ export default function ImageViewer({}) {
                       style={{ objectFit: 'contain' }}
                       alt={alt}
                       quality={80}
+                      priority={true}
                       onLoad={() => {
                         handleImageLoaded(i)
                       }}
