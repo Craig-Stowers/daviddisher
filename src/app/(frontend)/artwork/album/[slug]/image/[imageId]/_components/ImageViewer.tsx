@@ -100,7 +100,7 @@ export default function ImageViewer({ isPreRender }) {
                       fill
                       style={{ objectFit: 'contain' }}
                       alt={alt}
-                      quality={75}
+                      quality={50}
                       priority={true}
                       onLoad={() => {
                         handleImageLoaded(i)
