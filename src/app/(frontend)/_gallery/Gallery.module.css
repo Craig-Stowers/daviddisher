@@ -23,8 +23,8 @@
 
 .galleryItem img {
   /* filter: drop-shadow(2px 2px 3px rgba(0, 0, 0, 0.3)); */
-  outline: 1px solid rgba(255, 255, 255, 0.1); /* Border inside */
-  outline-offset: -1px; /* Moves the border inside */
+  /* outline: 1px solid rgba(255, 255, 255, 0.1);
+  outline-offset: -1px; */
 }
 
 .galleryItemPadding {
